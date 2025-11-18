@@ -8,33 +8,76 @@
     <link rel="stylesheet" href="/css/output.css">
 </head>
 
-<body class="bg-blue-50 grid gap-10 mb-20 md:pc_version">
-    <aside id="unassigned_staff_list" class="primary_background grid gap-5  mt-8 pb-6 pt-7 rounded-sm">
+<body class="bg-blue-50 grid gap-10 mb-20">
+    <aside id="unassigned_staff_list" class="unassigned_staff_list_mobile_version ">
         <h1 class="text-center primary_font text-lg">Staff Members (Unassigned)</h1>
-        <div id="unassigned_staff_card " class="staff_card ">
-
+        <!-- <div id="unassigned_staff_card" class="staff_card md:staff_card_pc_version ">
             <div style="background-image: url(/public/white.jpg);" id="unassigned_staff_profil"
                 class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
                 <img src="/public/man (1).png" width="100%" class="grid place-content-center" height="100%"
                     id="unassigned_staff_card_profil" alt="" srcset="">
-            </div>
+          
+                </div>
             <div class="grid-cols-1">
-                <p id="unassigned_staff_name" class="primary_font"> </p>
-                <p id="unassigned_staff_role" class="secondry_font"></p>
+                <p id="unassigned_staff_name" class="primary_font">zakaria</p>
+                <p id="unassigned_staff_role" class="secondry_font">person</p>
 
             </div>
-            <p id="modify" class="grid place-content-center editing_btn ">Edit</p>
-        </div>
+            <p id="modify" class="grid place-content-center editing_btn">Edit</p>
+        </div> -->
 
-        <button class="green_btn ">Add New worker</button>
+        <button id="add_new_worker_btn" class="green_btn ">Add New worker</button>
     </aside>
+   <dialog id="add_new_worker_modal">
+    <form >
+        <label class="modal_label">Name:</label>
+        <input type="text">
+        <label class="modal_label">Role:</label>
+        <input type="text">
+        <label class="modal_label">Photo (URL):</label>
+        <input type="text">
+        <div style="background-image: url(/public/white.jpg);" id="reception_staff_profil"
+            class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
+            <img src="/public/man (1).png" width="100%" class="grid place-content-center" height="100%"
+                id="reception_staff_card_profil" alt="" srcset="">
+        </div>
+    </form >
+    <div class="bg-[#f3f3f3] p-10 rounded-sm grid gap-1">
+        <h2 class="modal_primary_font">Experiences</h2>
+        <label class="primary_font">Company:</label>
+        <div contenteditable="true" class="editable_input"></div>
+
+        <label class="primary_font">Role:</label>
+        <div contenteditable="true" class="editable_input"></div>
+
+        <label class="primary_font">From:</label>
+        <div contenteditable="true" class="editable_input"></div>
+
+        <label class="primary_font">To:</label>
+        <div contenteditable="true" class="editable_input"></div>
+    </div>
+    <form>
+        <label class="modal_label">Company:</label>
+        <input type="text">
+        <label class="modal_label">Role:</label>
+        <select name="" id="">
+            <option value=""></option>
+        </select>
+        <label class="modal_label">From:</label>
+        <input type="date">
+        <label class="modal_label">To:</label>
+        <input type="date">
+    </form>
+    <button class="green_btn">Submit</button>
+</dialog>
+
     <div id="building_structure" class="mobile_cards_layout">
         <aside class="grid gap-3">
             <div id="conference_room " class="mobile_room_style ">
                 <h1 class="mobile_room_name">conference room</h1>
                 <div class="hidden" id="conference_room_table"></div>
                 <div class="" id="conference_staff_list">
-                    <div id="conference_staff_card " class="staff_card">
+                    <!-- <div id="conference_staff_card " class="staff_card">
 
                         <div style="background-image: url(/public/white.jpg);" id="conference_staff_profil"
                             class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
@@ -42,19 +85,19 @@
                                 id="conference_staff_card_profil" alt="" srcset="">
                         </div>
                         <div class="grid-cols-1">
-                            <p id="conference_staff_name" class="primary_font"> </p>
-                            <p id="conference_staff_role" class="secondry_font"></p>
+                            <p id="conference_staff_name" class="primary_font">zakarsia</p>
+                            <p id="conference_staff_role" class="secondry_font">person</p>
 
                         </div>
-                        <!-- <p id="modify" class="grid place-content-center ml-50 editing_btn ">Edit</p> -->
-                        <button class="grid place-content-center ml-50 delete_btn">X</button>
-                    </div>
+                        <button class="grid place-content-center delete_btn">X</button>
+                    </div> -->
                 </div>
             </div>
-            <div class="mobile_room_style" id="reception_room">
+            <div id="reception_room" class="mobile_room_style ">
                 <h1 class="mobile_room_name">reception room</h1>
+                <div class="hidden" id="reception_room_table"></div>
                 <div class="" id="reception_staff_list">
-                    <div id="reception_staff_card " class="staff_card">
+                    <!-- <div id="reception_staff_card " class="staff_card">
 
                         <div style="background-image: url(/public/white.jpg);" id="reception_staff_profil"
                             class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
@@ -62,20 +105,21 @@
                                 id="reception_staff_card_profil" alt="" srcset="">
                         </div>
                         <div class="grid-cols-1">
-                            <p id="reception_staff_name" class="primary_font"> </p>
-                            <p id="reception_staff_role" class="secondry_font"></p>
+                            <p id="reception_staff_name" class="primary_font">zakarsia</p>
+                            <p id="reception_staff_role" class="secondry_font">persossn</p>
 
                         </div>
-                        <button class="grid place-content-center ml-50 delete_btn">X</button>
-                    </div>
+                        <button class="grid place-content-center delete_btn">X</button>
+                    </div> -->
                 </div>
             </div>
         </aside>
         <section class="grid gap-3">
-            <div id="servers_room" class="mobile_room_style">
+         <div id="servers_room" class="mobile_room_style ">
                 <h1 class="mobile_room_name">servers room</h1>
+                <div class="hidden" id="servers_room_table"></div>
                 <div class="" id="servers_staff_list">
-                    <div id="servers_staff_card " class="staff_card">
+                    <!-- <div id="servers_staff_card " class="staff_card">
 
                         <div style="background-image: url(/public/white.jpg);" id="servers_staff_profil"
                             class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
@@ -83,81 +127,80 @@
                                 id="servers_staff_card_profil" alt="" srcset="">
                         </div>
                         <div class="grid-cols-1">
-                            <p id="reception_staff_name" class="primary_font"> </p>
-                            <p id="reception_staff_role" class="secondry_font"></p>
+                            <p id="servers_staff_name" class="primary_font">zakarsia</p>
+                            <p id="servers_staff_role" class="secondry_font">persossn</p>
 
                         </div>
-                        <!-- <p id="modify" class="grid place-content-center ml-50 editing_btn ">Edit</p> -->
-                        <button class="grid place-content-center ml-50 delete_btn">X</button>
-                    </div>
+                        <button class="grid place-content-center delete_btn">X</button>
+                    </div> -->
                 </div>
             </div>
-            <div class="mobile_room_style" id="security_room">
+             <div id="security_room" class="mobile_room_style ">
                 <h1 class="mobile_room_name">security room</h1>
+                <div class="hidden" id="security_room_table"></div>
                 <div class="" id="security_staff_list">
-                    <div id="security_staff_card " class="staff_card">
+                    <!-- <div id="security_staff_card " class="staff_card">
 
-                        <div style="background-image: url(/public/white.jpg);" id="reception_staff_profil"
+                        <div style="background-image: url(/public/white.jpg);" id="security_staff_profil"
                             class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
                             <img src="/public/man (1).png" width="100%" class="grid place-content-center" height="100%"
                                 id="security_staff_card_profil" alt="" srcset="">
                         </div>
                         <div class="grid-cols-1">
-                            <p id="security_staff_name" class="primary_font"> </p>
-                            <p id="security_staff_role" class="secondry_font"></p>
+                            <p id="security_staff_name" class="primary_font">zakarsia</p>
+                            <p id="security_staff_role" class="secondry_font">persossn</p>
 
                         </div>
-                        <!-- <p id="modify" class="grid place-content-center ml-50 editing_btn ">Edit</p> -->
-                        <button class="grid place-content-center ml-50 delete_btn">X</button>
-                    </div>
+                        <button class="grid place-content-center delete_btn">X</button>
+                    </div> -->
                 </div>
             </div>
         </section>
         <div class="grid gap-3">
-            <div class="mobile_room_style" id="staff_room">
+              <div id="security_room" class="mobile_room_style ">
                 <h1 class="mobile_room_name">staff room</h1>
-                <div>
-                    <div class="" id="staff_list">
-                        <div id="staff_card " class="staff_card">
+                <div class="hidden" id="staff_room_table"></div>
+                <div class="" id="staff_list">
+                    <!-- <div id="staff_card " class="staff_card">
 
-                            <div style="background-image: url(/public/white.jpg);" id="staff_profil"
-                                class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
-                                <img src="/public/man (1).png" width="100%" class="grid place-content-center"
-                                    height="100%" id="staff_card_profil" alt="" srcset="">
-                            </div>
-                            <div class="grid-cols-1">
-                                <p id="staff_name" class="primary_font"></p>
-                                <p id="staff_role" class="secondry_font"></p>
-
-                            </div>
-                            <!-- <p id="modify" class="grid place-content-center ml-50 editing_btn ">Edit</p> -->
-                            <button class="grid place-content-center ml-50 delete_btn">X</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mobile_room_style" id="vault_room">
-                <h1 class="mobile_room_name">vault room</h1>
-                <div class="" id="vault_staff_list">
-                    <div id="vault_staff_card " class="staff_card">
-                        <div style="background-image: url(/public/white.jpg);" id="vault_staff_profil"
+                        <div style="background-image: url(/public/white.jpg);" id="staff_profil"
                             class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
                             <img src="/public/man (1).png" width="100%" class="grid place-content-center" height="100%"
-                                id="security_staff_card_profil" alt="" srcset="">
+                                id="staff_card_profil" alt="" srcset="">
                         </div>
                         <div class="grid-cols-1">
-                            <p id="vault_staff_name" class="primary_font"> </p>
-                            <p id="vault_staff_role" class="secondry_font"></p>
+                            <p id="staff_name" class="primary_font">zakarsia</p>
+                            <p id="staff_role" class="secondry_font">persossn</p>
+
                         </div>
-                        <!-- <p id="modify" class="grid place-content-center ml-50 editing_btn ">Edit</p> -->
-                        <button class="grid place-content-center ml-50 delete_btn">X</button>
-                    </div>
+                        <button class="grid place-content-center delete_btn">X</button>
+                    </div> -->
+                </div>
+            </div>
+            <div id="vault_room" class="mobile_room_style ">
+                <h1 class="mobile_room_name">vault room</h1>
+                <div class="hidden" id="vault_room_table"></div>
+                <div class="" id="vault_list">
+                    <!-- <div id="staff_card " class="staff_card">
+
+                        <div style="background-image: url(/public/white.jpg);" id="staff_profil"
+                            class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
+                            <img src="/public/man (1).png" width="100%" class="grid place-content-center" height="100%"
+                                id="staff_card_profil" alt="" srcset="">
+                        </div>
+                        <div class="grid-cols-1">
+                            <p id="staff_name" class="primary_font">zakarsia</p>
+                            <p id="staff_role" class="secondry_font">persossn</p>
+
+                        </div>
+                        <button class="grid place-content-center delete_btn">X</button>
+                    </div> -->
                 </div>
             </div>
         </div>
 
     </div>
- <script src="/script/WorkspaceStaffManager.js"></script>
+    <script src="/script/WorkspaceStaffManager.js"></script>
 </body>
 
 </html>
