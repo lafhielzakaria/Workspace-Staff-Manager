@@ -27,6 +27,13 @@ const Validate_Rules = {
 };
 let staff_experieces = []
 let unassigned_staff_list = []
+let conferenceRoomWorkers = []
+let receptionRoomWorkers = []
+let serversRoomWorkers = []
+let securityRoomWorkers = []
+let workersRoom = []
+let Vault_Room = []
+const conference_staff_list = document.getElementById("conference_staff_list")
 const experiences_field = document.getElementById("experience_details")
 const company = document.getElementById("company");
 const roleContent = document.getElementById("role_content");
@@ -41,8 +48,16 @@ const unassignedStaffList = document.getElementById("unassigned_staff_list");
 const workerForm = document.getElementById("worker_form");
 const addNewWorkerModal = document.getElementById("add_new_worker_modal");
 const experieces = document.getElementById("experieces")
+const addWorkerToroom = document.getElementById("addWorkerToroom")
+// 1- the modal that make you add new 
 document.getElementById("add_new_worker_btn").addEventListener("click", () => {
     addNewWorkerModal.showModal();
+});
+document.querySelectorAll(".blue_btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        addWorkerToroom.style.display = "grid"
+        FilterWorkers(btn)
+    })
 });
 addExperienceBtn.addEventListener("click", () => {
     //  1 fonction 5asha tzid another div of experieces
@@ -54,13 +69,7 @@ addExperienceBtn.addEventListener("click", () => {
                         <input class = "userInputs" name="company_name" type="text" id="company_name">
                      <div class="errormessage" name="company_name"></div>
                         <label class="modal_label" for="worker_role">Role:</label>
-                           <select name="worker_role" class="userInputs" id="worker_role">
-                <option value="IT Guy">IT Guy</option>
-                <option value="Receptionist">Receptionist</option>
-                <option value="Security">Security</option>
-                <option value="Cleaning">Cleaning</option>
-                <option value="Other">Other</option>
-            </select>
+                       <input name = "worker_role" class = "userInputs" type="text">
                         <label class="modal_label" for="starting_date">From:</label>
                         <input class = "userInputs" type="date" name="starting_date" id="starting_date">
                      <div class="errormessage" name="starting_date"></div>
@@ -73,13 +82,11 @@ addExperienceBtn.addEventListener("click", () => {
 });
 function Form_validator() {
     let new_worker_inputs = workerForm.querySelectorAll(".userInputs")
-    console.log(new_worker_inputs)
     let wronginput = 0;
     new_worker_inputs.forEach(input => {
         let value = input.value.trim()
         let regex = Validate_Rules[input.name].regex
         let errormessage = document.getElementsByClassName("errormessage")[input.name];
-        console.log(regex)
         if (!value.match(regex) || Validate_Rules.ending_date > Validate_Rules.starting_date) {
             errormessage.textContent = Validate_Rules[input.name].errormessage
             errormessage.style.color = "red"
@@ -95,11 +102,9 @@ function Form_validator() {
 document.getElementById("worker_form").addEventListener("submit", (e) => {
     e.preventDefault();
     let new_worker_inputs = e.target.querySelectorAll(".userInputs")
-    console.log(new_worker_inputs)
     let new_worker = {
     }
     let wronginput = Form_validator();
-    console.log(wronginput)
     if (wronginput > 0) {
         return;
     }
@@ -109,40 +114,50 @@ document.getElementById("worker_form").addEventListener("submit", (e) => {
     unassigned_staff_list.push(new_worker)
     console.log(unassigned_staff_list)
     alert("The form submited with successfully!")
-    renderedStaff()
+    RenderedStaff()
 
     workerForm.reset();
     addNewWorkerModal.close();
 });
-//  function CreateStaffCard () {
-//     const staffcard = `
-//         <div draggabel = true ondragstart="dragstartHandler(event)"  id="staff_card" class="staff_card">
-//             <div style="background-image: url('/public/white.jpg');" 
-//                 id="staff_profil" 
-//                 class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
-//                 <img src="${worker_profile_image || '/public/man (1).png'}" 
-//                      width="100%" class="grid place-content-center" height="100%" 
-//                      id="staff_card_profil" alt="Staff Profile">
-//             </div>
-//             <div class="grid-cols-1">
-//                 <p id="staff_name" class="primary_font">${worker_name}</p>
-//                 <p id="staff_role" class="secondry_font">${worker_role}</p>
-//             </div>
-//             <button class="grid place-content-center delete_btn">X</button>
-//         </div>
-//     `;
 
-//     const card = document.createElement("div");
-//     card.innerHTML = staffcard;
+// the fonction that filtre the workers before the display
+function FilterWorkers(btn) {
 
+    let workersfiltred = {}
+    unassigned_staff_list.array.forEach(staffCard => {
+        workersfiltred[staffCard.name] = staffCard.value;
+        if (workersfiltred[staffCard.role == "Security"]) {
+            securityRoomWorkers.push(workersfiltred)
+            conferenceRoomWorkers.push(workersfiltred)
+        }
+        if (workersfiltred[staffCard.role == "Receptionist"]) {
+            receptionRoomWorkers.push(workersfiltred)
+            conferenceRoomWorkers.push(workersfiltred)
+        }
+        if (workersfiltred[staffCard.role == "IT Guy"]) {
+            serversRoomWorkers.push(workersfiltred)
+            conferenceRoomWorkers.push(workersfiltred)
+        }
+        if (workersfiltred[staffCard.role == "Other"]) {
+            workersRoom.push(workersfiltred)
+            conferenceRoomWorkers.push(workersfiltred)
+        }
+    
+    });
 
+    // unassigned_staff_list.array.forEach(staff => {
+    //     if()
+    //     if(worker_role.value == ){
 
-//     return card;
-// };
-function renderedStaff() {
-    let staff_card = ""
+    //     }
+    // });
+}
+
+// the fonction that display staff cards
+function RenderedStaff() {
+    let unassigned_staff_card = ""
     for (let item of unassigned_staff_list) {
-        staff_card += `
+        unassigned_staff_card += `
  <div draggabel = true ondragstart="dragstartHandler(event)"  id="staff_card" class="staff_card">
             <div style="background-image: url('/public/white.jpg');" 
                 id="staff_profil" 
@@ -155,10 +170,10 @@ function renderedStaff() {
                 <p id="staff_name" class="primary_font">${item.worker_name}</p>
                 <p id="staff_role" class="secondry_font">${item.worker_role}</p>
             </div>
-            <button class="grid place-content-center delete_btn">X</button>
+            <button id = "delete_btn" class="grid place-content-center delete_btn">X</button>
         </div>
      `;
-        unassignedStaffList.innerHTML = staff_card;
-     
+        unassignedStaffList.innerHTML = unassigned_staff_card;
+
     }
 }
