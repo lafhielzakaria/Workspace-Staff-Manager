@@ -105,6 +105,10 @@
         font-weight: bold;
         color: orange;
     }
+    .orange_btn{
+        background-color: orange;
+        padding: 10px;
+    }
     .staff_card {
         display: flex;
         margin-left: 4%;
@@ -130,6 +134,21 @@
 
     }
 
+    .blue_btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.blue_btn:hover {
+    background-color: #0056b3;
+}
+
+
     .delete_btn {
         background-color: rgb(255, 8, 0);
         border-radius: 50%;
@@ -143,8 +162,15 @@
         font-weight: bold;
         color: gray;
     }
-
- dialog {
+   .experieces{
+    background-color: rgb(74, 143, 255);
+  border-radius: 10%;
+   width: 50px;
+  text-align: center;
+   }
+ 
+ 
+   dialog {
     gap: 20px;
     max-width: 500px; 
     width: 90%; 
