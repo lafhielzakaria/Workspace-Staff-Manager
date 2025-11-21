@@ -9,17 +9,21 @@
         font-weight: var(--font-weight-semibold);
         color: var(--color-white);
         box-shadow: var(--shadow-md);
-        margin: 0 90px;
+        /* margin: 0 90px; */
+        display: grid;
+        place-content: center;
+        width: 50%;
+        margin: auto;
 
         &:hover {
             @media (hover: hover) {
                 background-color: rgb(181, 181, 181);
             }
         }
-
     }
 
     .delete_btn {
+        margin-left: 23%;
         border-radius: 3px;
         background-color: rgb(255, 0, 0);
         color: var(--color-white);
@@ -33,7 +37,13 @@
         }
     }
 
-    .blue_btn {
+    .addExperiences {
+        /* top: 50%;
+        left: 50%; */
+        width: 10%;
+        display: grid;
+        place-content: center;
+        justify-self: center;
         border-radius: 3px;
         background-color: rgb(0, 89, 255);
         padding-inline: --spacing(5);
@@ -42,6 +52,18 @@
         color: var(--color-white);
         box-shadow: var(--shadow-md);
 
+
+    }
+
+    .blue_btn {
+        text-align: center;
+        border-radius: 3px;
+        background-color: rgb(0, 89, 255);
+        padding-inline: --spacing(5);
+        padding-block: --spacing(2);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-white);
+        box-shadow: var(--shadow-md);
 
         &:hover {
             @media (hover: hover) {
@@ -60,59 +82,126 @@
         margin-left: 11px;
         font-family: sans-serif;
         font-weight: bold;
-        color: #423f3fe2; 
+        color: #423f3fe2;
     }
 
+    .modal_primary_font {
+        font-family: sans-serif;
+        font-weight: bolder;
+        color: #423f3fe2;
+    }
 
     .secondry_font {
         color: gray;
     }
 
-
-
     .mobile_cards_layout {
         display: grid;
         grid-template-columns: 1fr;
         gap: 44px;
-        /* place-content: center; */
-
     }
 
-  .pc_version{
-    display: grid;
-    grid-template-columns: 30% 70%;
-
-   }
-
-    .staff_card {
-        display: flex;
-        margin-left: 19px;
-        margin-right: 19px;
-        padding: 9px 1px 9px 0;
-        border-radius: 7px;
-        background-color: rgba(128, 128, 128, 0.227);
+    .pc_version {
+        display: grid;
+        grid-template-columns: 30% 70%;
     }
-    .editing_btn {
-        font-weight: bold;
-        color: orange;
-    }
+
     .mobile_room_name {
         color: rgb(255, 255, 255);
         margin-bottom: 35px;
         font-weight: bold;
     }
+
     .mobile_room_style {
         background-color: rgb(0, 0, 0);
-        margin-left: 47px;
-        margin-right: 47px;
-        padding-top: 14px;
-        padding-bottom: 14px;
+        width: 80%;
+        margin: auto;
+        padding-top: 10%;
+        padding-bottom: 10%;
         color: black;
         font-weight: bold;
         text-align: center;
-        padding-bottom: 20px;
-        
+        padding-bottom: 10%;
+        border-radius: 2%;
     }
+
+    .closeModal {
+        float: right;
+
+    }
+
+    .userInputs {
+        border: 3px solid black;
+    }
+
+    .editing_btn {
+        margin-left: 40%;
+        font-weight: bold;
+        color: orange;
+    }
+
+    .orange_btn {
+        background-color: orange;
+        padding: 10px;
+    }
+
+    .staff_card {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        place-content: center;
+        /* place-items: center; */
+        margin: auto;
+        width: 80%;
+        border-radius: 8px;
+        padding: 3%;
+        gap: 2%;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .ModalstaffCard {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        place-content: center;
+        width: 200%;
+        border-radius: 8px;
+        padding: 3%;
+        gap: 2%;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .pcLayout {
+        grid-template-columns: 30% 70%;
+    }
+
+    .staff_card_pc_version {
+        display: flex;
+        border-radius: 7px;
+        background-color: rgba(128, 128, 128, 0.227);
+    }
+
+    .unassigned_staff_list_mobile_version {
+        background-color: white;
+        margin: 8px 15px 0 15px;
+        display: grid;
+        gap: 10px;
+        padding: 7px 0 16px 0;
+        border-radius: 5px;
+    }
+
+    .blue_btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .blue_btn:hover {
+        background-color: #0056b3;
+    }
+
     .delete_btn {
         background-color: rgb(255, 8, 0);
         border-radius: 50%;
@@ -123,10 +212,89 @@
         font-weight: bold;
     }
 
-      
-    
-  /*9ad template dyal lpc*/
-  
+    .modal_label {
+        font-weight: bold;
+        color: gray;
+    }
 
-    /* flex gap-3 ml-2 mr-2 pt-1 pb-1 rounded-md bg-gray-100 */
+    .experieces {
+        background-color: rgb(74, 143, 255);
+        border-radius: 10%;
+        width: 50px;
+        text-align: center;
+    }
+
+    #addWorkerToroom {
+        gap: 10px;
+        max-width: 500px;
+        width: 90%;
+        height: 70%;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        display: none;
+    }
+    #staffProfileDetails {
+        gap: 10px;
+        max-width: 500px;
+        width: 90%;
+        height: 70%;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        display: none;
+    }
+
+    dialog {
+        position: fixed;
+        max-width: 500px;
+        width: 90%;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+    }
+
+    dialog::backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    dialog[open] {
+        display: grid;
+    }
+
+    dialog input,
+    dialog select {
+        width: 100%;
+        padding: 4px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    dialog button {
+        background-color: rgb(9, 183, 9);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
 }
