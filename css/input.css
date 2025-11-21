@@ -9,7 +9,11 @@
         font-weight: var(--font-weight-semibold);
         color: var(--color-white);
         box-shadow: var(--shadow-md);
-        margin: 0 90px;
+        /* margin: 0 90px; */
+        display: grid;
+        place-content: center;
+        width: 50%;
+        margin: auto;
 
         &:hover {
             @media (hover: hover) {
@@ -34,7 +38,12 @@
     }
 
     .addExperiences {
-        text-align: center;
+        /* top: 50%;
+        left: 50%; */
+        width: 10%;
+        display: grid;
+        place-content: center;
+        justify-self: center;
         border-radius: 3px;
         background-color: rgb(0, 89, 255);
         padding-inline: --spacing(5);
@@ -43,11 +52,7 @@
         color: var(--color-white);
         box-shadow: var(--shadow-md);
 
-        &:hover {
-            @media (hover: hover) {
-                background-color: rgb(58, 58, 58);
-            }
-        }
+
     }
 
     .blue_btn {
@@ -109,8 +114,8 @@
 
     .mobile_room_style {
         background-color: rgb(0, 0, 0);
-        margin-left: 10%;
-        margin-right: 10%;
+        width: 80%;
+        margin: auto;
         padding-top: 10%;
         padding-bottom: 10%;
         color: black;
@@ -118,6 +123,15 @@
         text-align: center;
         padding-bottom: 10%;
         border-radius: 2%;
+    }
+
+    .closeModal {
+        float: right;
+
+    }
+
+    .userInputs {
+        border: 3px solid black;
     }
 
     .editing_btn {
@@ -132,13 +146,31 @@
     }
 
     .staff_card {
-        display: flex;
-        margin-left: 4%;
-        margin-right: 9%;
-        border-radius: 7%;
+        display: grid;
+        grid-template-columns: 40% 60%;
+        place-content: center;
+        /* place-items: center; */
+        margin: auto;
+        width: 80%;
+        border-radius: 8px;
         padding: 3%;
         gap: 2%;
-        background-color: rgba(128, 128, 128, 0.227);
+        background-color: rgb(0, 0, 0);
+    }
+
+    .ModalstaffCard {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        place-content: center;
+        width: 200%;
+        border-radius: 8px;
+        padding: 3%;
+        gap: 2%;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .pcLayout {
+        grid-template-columns: 30% 70%;
     }
 
     .staff_card_pc_version {
@@ -154,7 +186,6 @@
         gap: 10px;
         padding: 7px 0 16px 0;
         border-radius: 5px;
-
     }
 
     .blue_btn {
@@ -170,7 +201,6 @@
     .blue_btn:hover {
         background-color: #0056b3;
     }
-
 
     .delete_btn {
         background-color: rgb(255, 8, 0);
@@ -210,9 +240,25 @@
         z-index: 1000;
         display: none;
     }
+    #staffProfileDetails {
+        gap: 10px;
+        max-width: 500px;
+        width: 90%;
+        height: 70%;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        display: none;
+    }
 
     dialog {
-        gap: 10px;
+        position: fixed;
         max-width: 500px;
         width: 90%;
         padding: 20px;
@@ -251,7 +297,4 @@
         border: none;
         cursor: pointer;
     }
-
-
-
 }
