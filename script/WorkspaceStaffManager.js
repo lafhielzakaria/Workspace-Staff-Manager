@@ -34,22 +34,11 @@ const Validate_Rules = {
         errormessage: "invilade worker role"
     },
 };
-let staff_experieces = []
 let unassigned_staff_list = []
-const conference_staff_list = document.getElementById("conference_staff_list")
-const experiences_field = document.getElementById("experience_details")
-const company = document.getElementById("company");
-const roleContent = document.getElementById("role_content");
-const startingDate = document.getElementById("starting_date");
-const endingDate = document.getElementById("ending_date");
-const experienceForm = document.getElementById("experience_form");
 const addExperienceBtn = document.getElementById("add_experience_btn");
-const workerNameInput = document.getElementById("worker_name");
-const workerRoleInput = document.getElementById("worker_role");
 const unassignedStaffList = document.getElementById("unassigned_staff_list");
 const workerForm = document.getElementById("worker_form");
 const addNewWorkerModal = document.getElementById("add_new_worker_modal");
-const experieces = document.getElementById("experieces")
 let new_experience_details = ""
 let worker_photo_url = document.getElementById("worker_photo_url")
 let worker_card_profil = document.getElementById("worker_card_profil")
@@ -143,6 +132,67 @@ function Form_validator() {
     });
     return wronginput
 }
+
+function validateExperienceDates() {
+    let experiencesInputs = document.querySelectorAll(".experiencesInputs");
+    let wronginput = 0;
+    
+    if (experiencesInputs.length === 0) {
+        return 0;
+    }
+    
+    for (let i = 0; i < experiencesInputs.length; i += 4) {
+        let companyInput = experiencesInputs[i];
+        let roleInput = experiencesInputs[i + 1];
+        let startDateInput = experiencesInputs[i + 2];
+        let endDateInput = experiencesInputs[i + 3];
+        
+        if (!companyInput.value.trim()) {
+            companyInput.style.border = "3px solid red";
+            wronginput++;
+        } else if (Validate_Rules.companyNameInexperience.regex.test(companyInput.value.trim())) {
+            companyInput.style.border = "3px solid green";
+        } else {
+            companyInput.style.border = "3px solid red";
+            wronginput++;
+        }
+        
+        if (!roleInput.value.trim()) {
+            roleInput.style.border = "3px solid red";
+            wronginput++;
+        } else if (Validate_Rules.workerRoleInexperience.regex.test(roleInput.value.trim())) {
+            roleInput.style.border = "3px solid green";
+        } else {
+            roleInput.style.border = "3px solid red";
+            wronginput++;
+        }
+        
+        if (!startDateInput.value) {
+            startDateInput.style.border = "3px solid red";
+            wronginput++;
+        } else {
+            startDateInput.style.border = "3px solid green";
+        }
+        
+        if (!endDateInput.value) {
+            endDateInput.style.border = "3px solid red";
+            wronginput++;
+        } else if (startDateInput.value && endDateInput.value) {
+            let startDate = new Date(startDateInput.value);
+            let endDate = new Date(endDateInput.value);
+            
+            if (endDate <= startDate) {
+                endDateInput.style.border = "3px solid red";
+                alert("Ending date must be after starting date");
+                wronginput++;
+            } else {
+                endDateInput.style.border = "3px solid green";
+            }
+        }
+    }
+    
+    return wronginput;
+}
 // the function that submit user inputs
 document.getElementById("worker_form").addEventListener("submit", (e) => {
     let i = 0;
@@ -157,7 +207,8 @@ document.getElementById("worker_form").addEventListener("submit", (e) => {
     }
     console.log(new_worker)
     let wronginput = Form_validator();
-    if (wronginput > 0) {
+    let dateErrors = validateExperienceDates();
+    if (wronginput > 0 || dateErrors > 0) {
         return;
     }
     new_worker_inputs.forEach((input) => {
@@ -186,13 +237,12 @@ document.getElementById("worker_form").addEventListener("submit", (e) => {
         input.style.border = "";
     });
 });
-
 // the function that filtre the workers and  display theme in the modal
 function FilterWorkers(btn) {
     let WhoCanWorks = []
     let RightRoom = btn.closest('[data-room]');
     let RightroomId = RightRoom.dataset.room;
-    
+
     switch (RightroomId) {
         case "reception_room":
             WhoCanWorks = ["Receptionist"];
@@ -210,12 +260,10 @@ function FilterWorkers(btn) {
             WhoCanWorks = ["IT Guy", "Receptionist", "Security", "Other", "Manager"];
             break;
     }
-    
     // Manager can be assigned everywhere
     if (!WhoCanWorks.includes("Manager")) {
         WhoCanWorks.push("Manager");
     }
-    
     // Cleaning can be assigned everywhere except Archives
     if (RightroomId !== "archives_room" && !WhoCanWorks.includes("Cleaning")) {
         WhoCanWorks.push("Cleaning");
@@ -223,12 +271,12 @@ function FilterWorkers(btn) {
     const addWorkerToroom = document.getElementById("addWorkerToroom")
     const workersListInModal = document.getElementById("workersListInModal")
     let workerCard = ""
-    
+
     unassigned_staff_list.forEach(worker => {
         if (WhoCanWorks.includes(worker.worker_role)) {
             workerCard += `
                 <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer transition-all hover:bg-gray-100 hover:-translate-y-0.5 hover:shadow-sm border border-gray-200 mb-3" onclick="assignWorkerToRoom(${worker.id}, '${RightroomId}')">
-                    <img src="${worker.worker_profile_image || '/public/man (1).png'}" alt="Staff Profile" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+                    <img src="${worker.worker_profile_image || '/public/user (1).png'}" alt="Staff Profile" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
                     <div class="flex-1">
                         <div class="font-medium text-gray-900 mb-1">${worker.worker_name}</div>
                         <div class="text-sm text-gray-600">${worker.worker_role}</div>
@@ -237,7 +285,7 @@ function FilterWorkers(btn) {
             `;
         }
     });
-    
+
     workersListInModal.innerHTML = workerCard || '<div class="flex flex-col items-center justify-center gap-3 p-8 text-gray-500 text-center"><i class="fas fa-users-slash text-3xl text-gray-400"></i><p class="text-sm">No suitable staff available</p></div>';
     return WhoCanWorks;
 }
@@ -261,46 +309,57 @@ function assignWorkerToRoom(workerId, roomId) {
                     <div class="font-medium text-gray-900 mb-1">${worker.worker_name}</div>
                     <div class="text-sm text-gray-600">${worker.worker_role}</div>
                 </div>
-                <button onclick="MoveToSideBar()" class="text-red-500 hover:text-red-700 p-1"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="MoveToSideBar(${worker.id})" class="text-red-500 hover:text-red-700 p-1"><i class="fa-solid fa-xmark"></i></button>
             </div>
         `;
         roomList.innerHTML += workerCard;
     }
-    
+
     // Update sidebar and close modal
     RenderedWorkersInSidebar();
     document.getElementById("addWorkerToroom").style.display = "none";
 }
 // the function that move the Worker From the room to the Side bar when user click to the delete btn
-function MoveToSideBar() {
-    
+function MoveToSideBar(workerId) {
+    const allRoomLists = ['conference_staff_list', 'reception_staff_list', 'servers_staff_list', 'security_staff_list', 'staff_list', 'vault_list', 'archives_staff_list'];
+
+    let worker = null;
+    allRoomLists.forEach(roomId => {
+        const roomElement = document.getElementById(roomId);
+        if (roomElement) {
+            const workerCards = roomElement.children;
+            for (let card of workerCards) {
+                const deleteBtn = card.querySelector('button[onclick*="' + workerId + '"]');
+                if (deleteBtn) {
+                    const img = card.querySelector('img');
+                    const name = card.querySelector('.font-medium').textContent;
+                    const role = card.querySelector('.text-sm').textContent;
+
+                    worker = {
+                        id: workerId,
+                        worker_name: name,
+                        worker_role: role,
+                        worker_profile_image: img.src.includes('/public/') ? img.src : null,
+                        experiences: []
+                    };
+
+                    card.remove();
+                    break;
+                }
+            }
+        }
+    });
+
+    if (worker) {
+        unassigned_staff_list.push(worker);
+        RenderedWorkersInSidebar();
+    }
 }
 //the function that generate Worker Id automaticly
 function GenerateId() {
     return Date.now()
 }
-//the function that Rendered the the right workers in the right room
-function RenderedWorkersinModal() {
-    let WhoCanWorks = FilterWorkers();
-    unassigned_staff_list.forEach(worker => {
-        if (WhoCanWorks.includes(worker.worker_role)) {
-            workerCard += `
- <div draggabel = true ondragstart="dragstartHandler(event)"  id="staff_card" class="staff_card">
-                <img class="rounded-full border-dashed border border-[#999696] ml-2"  src="${worker.worker_profile_image || '/public/man (1).png'}" 
-                     width="100%" class="grid place-content-center" height="100%" 
-                     id="staff_card_profil" alt="Staff Profile">
-            </div>
-            <div class="grid-cols-1">
-                <p id="staff_name" class="text-white">${worker.worker_name}</p>
-                <p id="staff_role" class="secondry_font">${worker.worker_role}</p>
-            </div>
-        </div>
-     `;
-            workersListInModal.innerHTML = workerCard;
-        }
-    });
-}
-//
+
 // the function that display staff cards
 function RenderedWorkersInSidebar() {
     let unassigned_staff_card = ""
@@ -325,9 +384,9 @@ function RenderedWorkersInSidebar() {
 function WorkerProfileDetails(id) {
     let findworker = unassigned_staff_list.find((worker) => worker.id == id);
     if (!findworker) return;
-    
+
     document.getElementById("workerProfile").style.display = "flex";
-    
+
     document.getElementById("workerPersonalInformation").innerHTML = `
         <div class="text-center mb-6">
             <img src="${findworker.worker_profile_image || '/public/user (1).png'}" 
@@ -336,7 +395,7 @@ function WorkerProfileDetails(id) {
             <p class="text-blue-600 font-medium">${findworker.worker_role}</p>
         </div>
     `;
-    
+
     let experienceHtml = "";
     if (findworker.experiences && findworker.experiences.length > 0) {
         experienceHtml = "<h3 class='text-lg font-semibold text-gray-900 mb-4'>Experience</h3>";
@@ -352,7 +411,7 @@ function WorkerProfileDetails(id) {
     } else {
         experienceHtml = "<p class='text-gray-500 text-center'>No experience recorded</p>";
     }
-    
+
     document.getElementById("experiencesContainer").innerHTML = experienceHtml;
 }
 

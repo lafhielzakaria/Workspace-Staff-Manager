@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Background Overlay -->
     <div id="modal-overlay" class="modal-overlay"></div>
@@ -17,7 +19,8 @@
                 <i class="fas fa-users text-blue-500"></i>
                 Workspace Staff Manager
             </h1>
-            <button id="add_new_worker_btn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center gap-2 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md">
+            <button id="add_new_worker_btn"
+                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center gap-2 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md">
                 <i class="fas fa-plus"></i>
                 Add Staff Member
             </button>
@@ -42,91 +45,112 @@
         <!-- Main Content -->
         <main class="flex flex-col">
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="building_structure">
-                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col" data-room="conference_room">
+                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col"
+                    data-room="conference_room">
                     <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                             <i class="fas fa-handshake text-blue-500"></i>
                             Conference Room
                         </h3>
-                        <button type="button" class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors" data-room="conference_room">
+                        <button type="button"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors"
+                            data-room="conference_room">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
                     <div id="conference_staff_list" class="flex-1 flex flex-col gap-3 overflow-y-auto max-h-48"></div>
                 </div>
 
-                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col" data-room="reception_room">
+                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col"
+                    data-room="reception_room">
                     <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                             <i class="fas fa-concierge-bell text-blue-500"></i>
                             Reception
                         </h3>
-                        <button type="button" class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors" data-room="reception_room">
+                        <button type="button"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors"
+                            data-room="reception_room">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
                     <div id="reception_staff_list" class="flex-1 flex flex-col gap-3 overflow-y-auto max-h-48"></div>
                 </div>
 
-                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col" data-room="servers_room">
+                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col"
+                    data-room="servers_room">
                     <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                             <i class="fas fa-server text-blue-500"></i>
                             Server Room
                         </h3>
-                        <button type="button" class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors" data-room="servers_room">
+                        <button type="button"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors"
+                            data-room="servers_room">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
                     <div id="servers_staff_list" class="flex-1 flex flex-col gap-3 overflow-y-auto max-h-48"></div>
                 </div>
 
-                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col" data-room="security_room">
+                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col"
+                    data-room="security_room">
                     <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                             <i class="fas fa-shield-alt text-blue-500"></i>
                             Security
                         </h3>
-                        <button type="button" class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors" data-room="security_room">
+                        <button type="button"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors"
+                            data-room="security_room">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
                     <div id="security_staff_list" class="flex-1 flex flex-col gap-3 overflow-y-auto max-h-48"></div>
                 </div>
 
-                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col" data-room="staff_room">
+                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col"
+                    data-room="staff_room">
                     <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                             <i class="fas fa-coffee text-blue-500"></i>
                             Staff Room
                         </h3>
-                        <button type="button" class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors" data-room="staff_room">
+                        <button type="button"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors"
+                            data-room="staff_room">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
                     <div id="staff_list" class="flex-1 flex flex-col gap-3 overflow-y-auto max-h-48"></div>
                 </div>
 
-                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col" data-room="vault_room">
+                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col"
+                    data-room="vault_room">
                     <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                             <i class="fas fa-vault text-blue-500"></i>
                             Vault
                         </h3>
-                        <button type="button" class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors" data-room="vault_room">
+                        <button type="button"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors"
+                            data-room="vault_room">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
                     <div id="vault_list" class="flex-1 flex flex-col gap-3 overflow-y-auto max-h-48"></div>
                 </div>
 
-                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col" data-room="archives_room">
+                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-150 min-h-[300px] flex flex-col"
+                    data-room="archives_room">
                     <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                             <i class="fas fa-archive text-blue-500"></i>
                             Archives
                         </h3>
-                        <button type="button" class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors" data-room="archives_room">
+                        <button type="button"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 w-9 h-9 rounded-full flex items-center justify-center add-staff-btn transition-colors"
+                            data-room="archives_room">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
@@ -137,27 +161,33 @@
     </div>
 
     <!-- Add Worker Modal -->
-    <dialog id="add_new_worker_modal" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-none rounded-xl p-0 max-w-lg w-[90vw] max-h-[90vh] overflow-hidden shadow-2xl m-0 backdrop:bg-black backdrop:bg-opacity-50 backdrop:backdrop-blur-sm">
+    <dialog id="add_new_worker_modal"
+        class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-none rounded-xl p-0 max-w-lg w-[90vw] max-h-[90vh] overflow-hidden shadow-2xl m-0 backdrop:bg-black backdrop:bg-opacity-50 backdrop:backdrop-blur-sm">
         <div class="bg-white rounded-xl max-w-lg w-full max-h-[90vh] overflow-hidden flex flex-col">
             <div class="flex justify-between items-center p-6 border-b border-gray-200 bg-gray-50">
                 <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                     <i class="fas fa-user-plus text-blue-500"></i>
                     Add New Staff Member
                 </h3>
-                <button type="button" id="closeAddNewWorkerModal" class="bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                <button type="button" id="closeAddNewWorkerModal"
+                    class="bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <form id="worker_form" class="p-6 overflow-y-auto flex-1">
                 <div class="mb-5">
                     <label for="worker_name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                    <input type="text" id="worker_name" name="worker_name" class="w-full p-3 border border-gray-300 rounded-lg text-sm transition-all focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 userInputs" placeholder="Enter full name" required>
+                    <input type="text" id="worker_name" name="worker_name"
+                        class="w-full p-3 border border-gray-300 rounded-lg text-sm transition-all focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 userInputs"
+                        placeholder="Enter full name" required>
                     <div class="text-red-500 text-xs mt-1 hidden" data-field="worker_name"></div>
                 </div>
 
                 <div class="mb-5">
                     <label for="worker_role" class="block text-sm font-medium text-gray-700 mb-2">Role</label>
-                    <select id="worker_role" name="worker_role" class="w-full p-3 border border-gray-300 rounded-lg text-sm transition-all focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 bg-white userInputs" required>
+                    <select id="worker_role" name="worker_role"
+                        class="w-full p-3 border border-gray-300 rounded-lg text-sm transition-all focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 bg-white userInputs"
+                        required>
                         <option value="">Select a role</option>
                         <option value="IT Guy">IT Specialist</option>
                         <option value="Receptionist">Receptionist</option>
@@ -170,14 +200,19 @@
                 </div>
 
                 <div class="mb-5">
-                    <label for="worker_photo_url" class="block text-sm font-medium text-gray-700 mb-2">Profile Photo URL</label>
-                    <input type="url" id="worker_photo_url" name="worker_profile_image" class="w-full p-3 border border-gray-300 rounded-lg text-sm transition-all focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 userInputs" placeholder="https://example.com/photo.jpg">
+                    <label for="worker_photo_url" class="block text-sm font-medium text-gray-700 mb-2">Profile Photo
+                        URL</label>
+                    <input type="url" id="worker_photo_url" name="worker_profile_image"
+                        class="w-full p-3 border border-gray-300 rounded-lg text-sm transition-all focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 userInputs"
+                        placeholder="https://example.com/photo.jpg">
                     <div class="text-red-500 text-xs mt-1 hidden" data-field="worker_profile_image"></div>
                 </div>
 
                 <div class="mb-5">
-                    <div class="relative w-30 h-30 mx-auto rounded-full overflow-hidden border-2 border-dashed border-gray-300 flex items-center justify-center">
-                        <img id="worker_card_profil" class="w-full h-full object-cover hidden" src="" alt="Profile preview">
+                    <div
+                        class="relative w-30 h-30 mx-auto rounded-full overflow-hidden border-2 border-dashed border-gray-300 flex items-center justify-center">
+                        <img id="worker_card_profil" class="w-full h-full object-cover hidden" src=""
+                            alt="Profile preview">
                         <div class="flex flex-col items-center gap-2 text-gray-400 text-center">
                             <i class="fas fa-user text-2xl"></i>
                             <span class="text-xs">Photo Preview</span>
@@ -188,17 +223,21 @@
                 <div class="mb-5">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Experience</label>
                     <div id="experiences_field" class="flex flex-col gap-3 mb-4"></div>
-                    <button type="button" id="add_experience_btn" class="bg-transparent text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white px-4 py-2 rounded-full flex items-center gap-2 transition-all">
+                    <button type="button" id="add_experience_btn"
+                        class="bg-transparent text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white px-4 py-2 rounded-full flex items-center gap-2 transition-all">
                         <i class="fas fa-plus"></i>
                         Add Experience
                     </button>
                 </div>
 
                 <div class="flex gap-3 justify-end pt-4 border-t border-gray-200 mt-4">
-                    <button type="button" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-full transition-colors" onclick="document.getElementById('add_new_worker_modal').close()">
+                    <button type="button"
+                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-full transition-colors"
+                        onclick="document.getElementById('add_new_worker_modal').close()">
                         Cancel
                     </button>
-                    <button type="submit" id="submit_worker" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-md">
+                    <button type="submit" id="submit_worker"
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-md">
                         <i class="fas fa-save"></i>
                         Save Staff Member
                     </button>
@@ -208,14 +247,16 @@
     </dialog>
 
     <!-- Worker Profile Modal -->
-    <div id="workerProfile" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <div id="workerProfile"
+        class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-xl max-w-lg w-full max-h-[90vh] overflow-hidden flex flex-col">
             <div class="flex justify-between items-center p-6 border-b border-gray-200 bg-gray-50">
                 <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                     <i class="fas fa-user text-blue-500"></i>
                     Staff Profile
                 </h3>
-                <button type="button" id="closeProfileDetalsModal" class="bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                <button type="button" id="closeProfileDetalsModal"
+                    class="bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -227,14 +268,16 @@
     </div>
 
     <!-- Assign Worker Modal -->
-    <div id="addWorkerToroom" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <div id="addWorkerToroom"
+        class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-xl max-w-lg w-full max-h-[90vh] overflow-hidden flex flex-col">
             <div class="flex justify-between items-center p-6 border-b border-gray-200 bg-gray-50">
                 <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                     <i class="fas fa-user-plus text-blue-500"></i>
                     Assign Staff to Room
                 </h3>
-                <button type="button" id="closeAssignemnetWorkerModal" class="bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                <button type="button" id="closeAssignemnetWorkerModal"
+                    class="bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -249,4 +292,5 @@
 
     <script src="script/WorkspaceStaffManager.js"></script>
 </body>
+
 </html>
