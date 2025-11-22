@@ -8,11 +8,13 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-blue-50: oklch(97% 0.014 254.604);
+    --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
     --text-lg: 1.125rem;
     --text-lg--line-height: calc(1.75 / 1.125);
     --font-weight-semibold: 600;
+    --font-weight-bold: 700;
     --radius-sm: 0.25rem;
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --default-font-family: var(--font-sans);
@@ -207,6 +209,12 @@
   .h-25 {
     height: calc(var(--spacing) * 25);
   }
+  .h-30 {
+    height: calc(var(--spacing) * 30);
+  }
+  .h-70 {
+    height: calc(var(--spacing) * 70);
+  }
   .w-15 {
     width: calc(var(--spacing) * 15);
   }
@@ -228,6 +236,9 @@
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   .place-content-center {
     place-content: center;
   }
@@ -242,6 +253,9 @@
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
+  }
+  .gap-5 {
+    gap: calc(var(--spacing) * 5);
   }
   .gap-6 {
     gap: calc(var(--spacing) * 6);
@@ -272,6 +286,12 @@
   .bg-blue-50 {
     background-color: var(--color-blue-50);
   }
+  .bg-white {
+    background-color: var(--color-white);
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
   .p-10 {
     padding: calc(var(--spacing) * 10);
   }
@@ -281,6 +301,13 @@
   .text-lg {
     font-size: var(--text-lg);
     line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+  .text-black {
+    color: var(--color-black);
   }
   .text-white {
     color: var(--color-white);
@@ -292,9 +319,14 @@
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
   }
-  .md\:h-60 {
+  .md\:w-50 {
     @media (width >= 48rem) {
-      height: calc(var(--spacing) * 60);
+      width: calc(var(--spacing) * 50);
+    }
+  }
+  .md\:w-60 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 60);
     }
   }
   .md\:grid-cols-2 {
@@ -310,6 +342,16 @@
   .md\:gap-10 {
     @media (width >= 48rem) {
       gap: calc(var(--spacing) * 10);
+    }
+  }
+  .md\:gap-20 {
+    @media (width >= 48rem) {
+      gap: calc(var(--spacing) * 20);
+    }
+  }
+  .md\:p-10 {
+    @media (width >= 48rem) {
+      padding: calc(var(--spacing) * 10);
     }
   }
 }
@@ -372,6 +414,11 @@
         background-color: rgb(58, 58, 58);
       }
     }
+  }
+  .title_font {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: x-large;
+    font-weight: bold;
   }
   .primary_background {
     background-color: white;
@@ -442,6 +489,17 @@
     padding: 3%;
     gap: 2%;
     background-color: rgb(0, 0, 0);
+  }
+  .staffCardInprofileModal {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    place-content: center;
+    margin: auto;
+    width: 80%;
+    border-radius: 8px;
+    padding: 3%;
+    gap: 2%;
+    font-size: larger;
   }
   .ModalstaffCard {
     display: grid;
@@ -516,7 +574,7 @@
     z-index: 1000;
     display: none;
   }
-  #staffProfileDetails {
+  #workerProfile {
     gap: 10px;
     max-width: 500px;
     width: 90%;
@@ -593,6 +651,10 @@
   inherits: false;
   initial-value: solid;
 }
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
 @property --tw-outline-style {
   syntax: "*";
   inherits: false;
@@ -607,6 +669,7 @@
       --tw-skew-x: initial;
       --tw-skew-y: initial;
       --tw-border-style: solid;
+      --tw-font-weight: initial;
       --tw-outline-style: solid;
     }
   }
