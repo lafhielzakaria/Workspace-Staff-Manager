@@ -1,106 +1,241 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workspace Staff Manager</title>
-    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<body>
+    <!-- Background Overlay -->
+    <div id="modal-overlay" class="modal-overlay"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="header-title">
+                <i class="fas fa-users"></i>
+                Workspace Staff Manager
+            </h1>
+            <button id="add_new_worker_btn" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                Add Staff Member
+            </button>
+        </div>
+    </header>
 
-<body class="bg-blue-50">
+    <!-- Main Container -->
     <div class="main-container">
-    <aside id="unassigned_staff" class="unassigned_staff_list_mobile_version">
-        <h1 class="text-center primary_font text-lg">Staff Members (Unassigned)</h1>
-        <div id="unassigned_staff_list" class="grid gap-6">
-        </div>
-        <button id="add_new_worker_btn" class="green_btn">Add New Worker</button>
-    </aside>
-    <div id="workerProfile">
-        <img class="absolute top-0 right-0 m-5 cursor-pointer" id="closeProfileDetalsModal" src="/public/close.png"
-            alt="closeModal" height="20px" width="20px">
-            <div id="workerProfileDetails">
-                <div id="workerPersonalInformation"></div>
-                <div id="experiencesContainer"></div>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">
+                    <i class="fas fa-user-clock"></i>
+                    Unassigned Staff
+                </h2>
             </div>
-    </div>
-    <div id="addWorkerToroom" class="">
-        <img class="absolute top-0 right-0 m-5 cursor-pointer" id="closeAssignemnetWorkerModal" src="/public/close.png"
-            alt="closeModal" height="20px" width="20px">
-        <div id="workersListInModal" class="grid place-content-center place-items-center gap-3">
-            <img src="/public/nothing_5288469.png" height="50px" width="50px" alt=">No  worker exist">
-            <p class="mr-3">No worker exist</p>
-        </div>
+            <div id="unassigned_staff_list" class="staff-list">
+                <!-- Unassigned staff will be populated here -->
+            </div>
+        </aside>
 
-    </div>
-    <dialog id="add_new_worker_modal">
-        <img class="absolute top-0 right-0 m-5" id="closeAddNewWorkerModal" src="/public/close.png" alt="closeModal"
-            height="20px" width="20px">
-        <form id="worker_form" class=" grid gap-2">
-            <label class="modal_label" for="worker_name">Name:</label>
-            <input name="worker_name" class="userInputs" type="text" id="worker_name">
-            <div class="errormessage" name="worker_name"></div>
-            <label class="modal_label" for="worker_role">Role:</label>
-            <select name="worker_role" class="userInputs" id="worker_role">
-                <option value="IT Guy">IT Guy</option>
-                <option value="Receptionist">Receptionist</option>
-                <option value="Security">Security</option>
-                <option value="Cleaning">Cleaning</option>
-                <option value="Other">Other</option>
-                <option value="Manager">Manager</option>
-            </select>
-            <div class="errormessage" name="worker_role"></div>
-            <label class="modal_label" for="worker_photo_url">Photo (URL):</label>
-            <input class="userInputs" name="worker_profile_image" id="worker_photo_url">
-            <div class="errormessage" name="worker_profile_image"></div>
-            <img class="w-25 m-auto h-25 rounded-full border-dashed border border-[#999696] " width="100%" height="100%"
-                id="worker_card_profil" alt="prfile image">
-            <div id="experiences_field">
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="rooms-grid" id="building_structure">
+                <div class="room-card" data-room="conference_room">
+                    <div class="room-header">
+                        <h3 class="room-title">
+                            <i class="fas fa-handshake"></i>
+                            Conference Room
+                        </h3>
+                        <button type="button" class="btn btn-secondary btn-sm add-staff-btn" data-room="conference_room">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="conference_staff_list" class="room-staff-list"></div>
+                </div>
+
+                <div class="room-card" data-room="reception_room">
+                    <div class="room-header">
+                        <h3 class="room-title">
+                            <i class="fas fa-concierge-bell"></i>
+                            Reception
+                        </h3>
+                        <button type="button" class="btn btn-secondary btn-sm add-staff-btn" data-room="reception_room">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="reception_staff_list" class="room-staff-list"></div>
+                </div>
+
+                <div class="room-card" data-room="servers_room">
+                    <div class="room-header">
+                        <h3 class="room-title">
+                            <i class="fas fa-server"></i>
+                            Server Room
+                        </h3>
+                        <button type="button" class="btn btn-secondary btn-sm add-staff-btn" data-room="servers_room">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="servers_staff_list" class="room-staff-list"></div>
+                </div>
+
+                <div class="room-card" data-room="security_room">
+                    <div class="room-header">
+                        <h3 class="room-title">
+                            <i class="fas fa-shield-alt"></i>
+                            Security
+                        </h3>
+                        <button type="button" class="btn btn-secondary btn-sm add-staff-btn" data-room="security_room">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="security_staff_list" class="room-staff-list"></div>
+                </div>
+
+                <div class="room-card" data-room="staff_room">
+                    <div class="room-header">
+                        <h3 class="room-title">
+                            <i class="fas fa-coffee"></i>
+                            Staff Room
+                        </h3>
+                        <button type="button" class="btn btn-secondary btn-sm add-staff-btn" data-room="staff_room">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="staff_list" class="room-staff-list"></div>
+                </div>
+
+                <div class="room-card" data-room="vault_room">
+                    <div class="room-header">
+                        <h3 class="room-title">
+                            <i class="fas fa-vault"></i>
+                            Vault
+                        </h3>
+                        <button type="button" class="btn btn-secondary btn-sm add-staff-btn" data-room="vault_room">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="vault_list" class="room-staff-list"></div>
+                </div>
             </div>
-            <button type="button" id="add_experience_btn" class="addExperiences">+</button>
-            <button type="submit" id="submit_worker" class="green_btn ">Submit</button>
-        </form>
+        </main>
+    </div>
+
+    <!-- Add Worker Modal -->
+    <dialog id="add_new_worker_modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-user-plus"></i>
+                    Add New Staff Member
+                </h3>
+                <button type="button" id="closeAddNewWorkerModal" class="btn-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="worker_form" class="modal-form">
+                <div class="form-group">
+                    <label for="worker_name" class="form-label">Full Name</label>
+                    <input type="text" id="worker_name" name="worker_name" class="form-input userInputs" placeholder="Enter full name" required>
+                    <div class="error-message" data-field="worker_name"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="worker_role" class="form-label">Role</label>
+                    <select id="worker_role" name="worker_role" class="form-select userInputs" required>
+                        <option value="">Select a role</option>
+                        <option value="IT Guy">IT Specialist</option>
+                        <option value="Receptionist">Receptionist</option>
+                        <option value="Security">Security Officer</option>
+                        <option value="Cleaning">Cleaning Staff</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="error-message" data-field="worker_role"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="worker_photo_url" class="form-label">Profile Photo URL</label>
+                    <input type="url" id="worker_photo_url" name="worker_profile_image" class="form-input userInputs" placeholder="https://example.com/photo.jpg">
+                    <div class="error-message" data-field="worker_profile_image"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="photo-preview">
+                        <img id="worker_card_profil" class="preview-image" src="" alt="Profile preview">
+                        <div class="preview-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span>Photo Preview</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Experience</label>
+                    <div id="experiences_field" class="experiences-container"></div>
+                    <button type="button" id="add_experience_btn" class="btn btn-outline">
+                        <i class="fas fa-plus"></i>
+                        Add Experience
+                    </button>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('add_new_worker_modal').close()">
+                        Cancel
+                    </button>
+                    <button type="submit" id="submit_worker" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Save Staff Member
+                    </button>
+                </div>
+            </form>
+        </div>
     </dialog>
-    <div id="building_structure" class="mobile_cards_layout">
-        <div name="conference_room" id="conference_room" class="mobile_room_style">
-            <h1 class="mobile_room_name">Conference Room</h1>
-            <div id="conference_staff_list"></div>
-            <button type="button" name="conference_room" class="blue_btn">+</button>
-        </div>
-        
-        <div name="reception_room" id="reception_room" class="mobile_room_style">
-            <h1 class="mobile_room_name">Reception Room</h1>
-            <div id="reception_staff_list"></div>
-            <button name="reception_room" type="button" class="blue_btn">+</button>
-        </div>
-        
-        <div name="servers_room" id="servers_room" class="mobile_room_style">
-            <h1 class="mobile_room_name">Servers Room</h1>
-            <div id="servers_staff_list"></div>
-            <button name="servers_room" type="button" class="blue_btn">+</button>
-        </div>
-        
-        <div name="security_room" id="security_room" class="mobile_room_style">
-            <h1 class="mobile_room_name">Security Room</h1>
-            <div id="security_staff_list"></div>
-            <button name="security_room" type="button" class="blue_btn">+</button>
-        </div>
-        
-        <div id="staff_room" name="staff_room" class="mobile_room_style">
-            <h1 class="mobile_room_name">Staff Room</h1>
-            <div id="staff_list"></div>
-            <button name="staff_room" type="button" class="blue_btn">+</button>
-        </div>
-        
-        <div name="vault_room" id="vault_room" class="mobile_room_style">
-            <h1 class="mobile_room_name">Vault Room</h1>
-            <div id="vault_list"></div>
-            <button name="vault_room" type="button" class="blue_btn">+</button>
+
+    <!-- Worker Profile Modal -->
+    <div id="workerProfile" class="modal-overlay-content">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-user"></i>
+                    Staff Profile
+                </h3>
+                <button type="button" id="closeProfileDetalsModal" class="btn-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="workerProfileDetails" class="profile-details">
+                <div id="workerPersonalInformation" class="personal-info"></div>
+                <div id="experiencesContainer" class="experiences-section"></div>
+            </div>
         </div>
     </div>
+
+    <!-- Assign Worker Modal -->
+    <div id="addWorkerToroom" class="modal-overlay-content">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-user-plus"></i>
+                    Assign Staff to Room
+                </h3>
+                <button type="button" id="closeAssignemnetWorkerModal" class="btn-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="workersListInModal" class="workers-list">
+                <div class="empty-state">
+                    <i class="fas fa-users-slash"></i>
+                    <p>No unassigned staff members available</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script/WorkspaceStaffManager.js"></script>
 </body>
-
 </html>

@@ -71,9 +71,10 @@ document.getElementById("closeAddNewWorkerModal").addEventListener("click", () =
     worker_card_profil.src = ""
     new_experience_details = ""
 })
-document.querySelectorAll(".blue_btn").forEach(btn => {
+document.querySelectorAll(".add-staff-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-        addWorkerToroom.style.display = "grid"
+        const addWorkerToroom = document.getElementById("addWorkerToroom")
+        addWorkerToroom.style.display = "flex"
         FilterWorkers(btn)
     })
 });
@@ -112,17 +113,20 @@ function Form_validator() {
     new_worker_inputs.forEach(input => {
         let value = input.value.trim()
         let regex = Validate_Rules[input.name].regex
-        let errormessage = document.getElementsByClassName("errormessage")[input.name];
-        if (!value.match(regex) || Validate_Rules.ending_date > Validate_Rules.starting_date) {
-            errormessage.textContent = Validate_Rules[input.name].errormessage
-            errormessage.style.color = "red"
-            input.style.border = " 3px solid red"
+        let errormessage = document.querySelector(`[data-field="${input.name}"]`);
+        if (!value.match(regex)) {
+            if (errormessage) {
+                errormessage.textContent = Validate_Rules[input.name].errormessage
+                errormessage.style.color = "red"
+            }
+            input.style.border = "3px solid red"
             wronginput++
         } else {
             input.style.border = "3px solid green"
-            errormessage.textContent = ""
+            if (errormessage) {
+                errormessage.textContent = ""
+            }
         }
-        input.style.border = " 3px solid black"
     });
     return wronginput
 }
@@ -167,9 +171,9 @@ document.getElementById("worker_form").addEventListener("submit", (e) => {
 // the function that filtre the workers before the display
 function FilterWorkers(btn) {
     let WhoCanWorks = []
-    let RightRoom = btn.parentNode;
+    let RightRoom = btn.closest('.room-card');
     console.log(RightRoom)
-    let RightroomId = RightRoom.id;
+    let RightroomId = RightRoom.dataset.room;
     switch (RightroomId) {
         case "conference_room":
             WhoCanWorks = ["IT Guy", "Receptionist", "Security", "Cleaning", "Other", "Manager"];
@@ -191,24 +195,54 @@ function FilterWorkers(btn) {
             break;
     }
     const addWorkerToroom = document.getElementById("addWorkerToroom")
+    const workersListInModal = document.getElementById("workersListInModal")
     let workerCard = ""
+    
     unassigned_staff_list.forEach(worker => {
         if (WhoCanWorks.includes(worker.worker_role)) {
             workerCard += `
- <div draggabel = true ondragstart="dragstartHandler(event)"  id="staff_card" class="ModalstaffCard">            
-                <img class="rounded-full border-dashed border border-[#999696] " src="${worker.worker_profile_image} || '/public/man (1).png'}" 
-              id="staff_card_profil" alt="Staff Profile">
-            <div class="grid-cols-1">
-                <p id="staff_name" class="text-white">${worker.worker_name}</p>
-                <p id="staff_role" class="secondry_font">${worker.worker_role}</p>
-            </div>
-        </div>
-     `;
-            workersListInModal.innerHTML = workerCard;
+                <div class="staff-card" onclick="assignWorkerToRoom(${worker.id}, '${RightroomId}')" style="cursor: pointer;">
+                    <img src="${worker.worker_profile_image || '/public/man (1).png'}" alt="Staff Profile">
+                    <div class="staff-info">
+                        <div class="staff-name">${worker.worker_name}</div>
+                        <div class="staff-role">${worker.worker_role}</div>
+                    </div>
+                </div>
+            `;
         }
     });
+    
+    workersListInModal.innerHTML = workerCard || '<div class="empty-state"><i class="fas fa-users-slash"></i><p>No suitable staff available</p></div>';
     return WhoCanWorks;
+}
 
+// Function to assign worker to room
+function assignWorkerToRoom(workerId, roomId) {
+    const worker = unassigned_staff_list.find(w => w.id == workerId);
+    if (!worker) return;
+    
+    // Remove from unassigned list
+    const index = unassigned_staff_list.findIndex(w => w.id == workerId);
+    unassigned_staff_list.splice(index, 1);
+    
+    // Add to room
+    const roomList = document.getElementById(roomId.replace('_room', '_staff_list') || roomId + '_list');
+    if (roomList) {
+        const workerCard = `
+            <div class="staff-card">
+                <img src="${worker.worker_profile_image || '/public/user (1).png'}" alt="Staff Profile">
+                <div class="staff-info">
+                    <div class="staff-name">${worker.worker_name}</div>
+                    <div class="staff-role">${worker.worker_role}</div>
+                </div>
+            </div>
+        `;
+        roomList.innerHTML += workerCard;
+    }
+    
+    // Update sidebar and close modal
+    RenderedWorkersInSidebar();
+    document.getElementById("addWorkerToroom").style.display = "none";
 }
 //the function that generate Worker Id automaticly
 function GenerateId() {
@@ -221,13 +255,13 @@ function RenderedWorkersinModal() {
         if (WhoCanWorks.includes(worker.worker_role)) {
             workerCard += `
  <div draggabel = true ondragstart="dragstartHandler(event)"  id="staff_card" class="staff_card">
-                <img class="rounded-full border-dashed border border-[#999696] ml-2"  src="${item.worker_profile_image} || '/public/man (1).png'}" 
+                <img class="rounded-full border-dashed border border-[#999696] ml-2"  src="${worker.worker_profile_image || '/public/man (1).png'}" 
                      width="100%" class="grid place-content-center" height="100%" 
                      id="staff_card_profil" alt="Staff Profile">
             </div>
             <div class="grid-cols-1">
-                <p id="staff_name" class="text-white">${item.worker_name}</p>
-                <p id="staff_role" class="secondry_font">${item.worker_role}</p>
+                <p id="staff_name" class="text-white">${worker.worker_name}</p>
+                <p id="staff_role" class="secondry_font">${worker.worker_role}</p>
             </div>
         </div>
      `;
@@ -242,22 +276,18 @@ function RenderedWorkersInSidebar() {
     for (let item of unassigned_staff_list) {
         console.log(item)
         unassigned_staff_card += `
- <div draggabel = true ondragstart="dragstartHandler(event)"  id="staff_card" class="staff_card">
-            <div style="background-image: url('/public/white.jpg');" 
-                id="staff_profil" 
-                class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
-                <img onclick = "WorkerProfileDetails(${item.id})" src="${item.worker_profile_image} || '/public/user (1).png'}" 
-                     width="100%" class="grid place-content-center" height="100%" 
-                     id="staff_card_profil" alt="Staff Profile">
+            <div class="staff-card" draggable="true" ondragstart="dragstartHandler(event)">
+                <img onclick="WorkerProfileDetails(${item.id})" 
+                     src="${item.worker_profile_image || '/public/user (1).png'}" 
+                     alt="Staff Profile">
+                <div class="staff-info">
+                    <div class="staff-name">${item.worker_name}</div>
+                    <div class="staff-role">${item.worker_role}</div>
+                </div>
             </div>
-            <div class="grid-cols-1">
-                <p id="staff_name" class="primary_font">${item.worker_name}</p>
-                <p id="staff_role" class="secondry_font">${item.worker_role}</p>
-            </div>
-        </div>
-     `;
-        unassignedStaffList.innerHTML = unassigned_staff_card;
+        `;
     }
+    unassignedStaffList.innerHTML = unassigned_staff_card;
 }
 // the function that allow user to see worker details 
 function WorkerProfileDetails(id) {
@@ -273,7 +303,7 @@ function WorkerProfileDetails(id) {
             <div style="background-image: url('/public/white.jpg');" 
                 id="staff_profil" 
                 class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
-                <img onclick = "WorkerProfileDetails(${findworker.id})" src="${findworker.worker_profile_image} || '/public/user (1).png'}" 
+                <img onclick = "WorkerProfileDetails(${findworker.id})" src="${findworker.worker_profile_image || '/public/user (1).png'}" 
                      width="100%" class="grid place-content-center" height="100%" 
                      id="staff_card_profil" alt="Staff Profile">
             </div>
