@@ -68,8 +68,14 @@ document.getElementById("add_new_worker_btn").addEventListener("click", () => {
 document.getElementById("closeAddNewWorkerModal").addEventListener("click", () => {
     addNewWorkerModal.close();
     workerForm.reset();
-    worker_card_profil.src = ""
-    new_experience_details = ""
+    document.getElementById("experiences_field").innerHTML = "";
+    document.getElementById("worker_card_profil").src = "";
+    document.getElementById("worker_card_profil").classList.add("hidden");
+    new_experience_details = "";
+    // Reset input borders
+    workerForm.querySelectorAll(".userInputs").forEach(input => {
+        input.style.border = "";
+    });
 })
 document.querySelectorAll(".add-staff-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -80,33 +86,40 @@ document.querySelectorAll(".add-staff-btn").forEach(btn => {
 });
 document.getElementById("closeAssignemnetWorkerModal").addEventListener("click", () => {
     addWorkerToroom.style.display = "none"
-    console.log(addWorkerToroom)
 })
 document.getElementById("closeProfileDetalsModal").addEventListener("click", () => {
     workerProfile.style.display = "none"
 })
 addExperienceBtn.addEventListener("click", () => {
-    //  1 fonction 5asha tzid another div of experieces
     let experiences_field = document.getElementById("experiences_field")
-    new_experience_details += `  <div id="experience_details" class="bg-[#f3f3f3] mt-5 p-10 rounded-sm grid gap-4">
-                    <h2 class="modal_primary_font text-center">Experience</h2>
-                    <div class="grid gap-4" id="experiences_container">
-                        <label class="modal_label" for="company_name">Company:</label>
-                        <input class = "experiencesInputs" name="companyNameInexperience" type="text" id="company_name">
-                     <div class="errormessage" name="companyNameInexperience"></div>
-                        <label class="modal_label" for="worker_role">Role:</label>
-                       <input name = "workerRoleInexperience" class = "experiencesInputs" type="text">
-                        <label class="modal_label" for="starting_date">From:</label>
-                        <input class = "experiencesInputs" type="date" name="startingDateInexperience" id="starting_date">
-                     <div class="errormessage" name="startingDateInexperience"></div>
-                        <label class="modal_label" for="ending_date">To:</label>
-                        <input class = "experiencesInputs" type="date" class="modal_label" for="ending_date" name="endingDateInexperience">
-                     <div class="errormessage" name="endingDateInexperience"></div>          
-                        </div>
-                </div>`
+    new_experience_details += `
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
+            <h3 class="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
+                <i class="fas fa-briefcase text-blue-500"></i>
+                Experience
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Company</label>
+                    <input class="experiencesInputs w-full p-2 border border-gray-300 rounded text-sm" name="companyNameInexperience" type="text" placeholder="Company name">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Role</label>
+                    <input class="experiencesInputs w-full p-2 border border-gray-300 rounded text-sm" name="workerRoleInexperience" type="text" placeholder="Job title">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">From</label>
+                    <input class="experiencesInputs w-full p-2 border border-gray-300 rounded text-sm" type="date" name="startingDateInexperience">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">To</label>
+                    <input class="experiencesInputs w-full p-2 border border-gray-300 rounded text-sm" type="date" name="endingDateInexperience">
+                </div>
+            </div>
+        </div>`
     experiences_field.innerHTML = new_experience_details
 });
-// the function that validate user inputs before 
+// the function that validate user inputs before Submited
 function Form_validator() {
     let new_worker_inputs = workerForm.querySelectorAll(".userInputs")
     let wronginput = 0;
@@ -160,39 +173,52 @@ document.getElementById("worker_form").addEventListener("submit", (e) => {
             i = 0;
         }
     });
-
     unassigned_staff_list.push(new_worker)
-    console.log(experiencesInputs)
     addNewWorkerModal.close();
     RenderedWorkersInSidebar()
     workerForm.reset();
+    document.getElementById("experiences_field").innerHTML = "";
+    document.getElementById("worker_card_profil").src = "";
+    document.getElementById("worker_card_profil").classList.add("hidden");
+    new_experience_details = "";
+    // Reset input borders
+    workerForm.querySelectorAll(".userInputs").forEach(input => {
+        input.style.border = "";
+    });
 });
 
-// the function that filtre the workers before the display
+// the function that filtre the workers and  display theme in the modal
 function FilterWorkers(btn) {
     let WhoCanWorks = []
-    let RightRoom = btn.closest('.room-card');
-    console.log(RightRoom)
+    let RightRoom = btn.closest('[data-room]');
     let RightroomId = RightRoom.dataset.room;
+    
     switch (RightroomId) {
-        case "conference_room":
-            WhoCanWorks = ["IT Guy", "Receptionist", "Security", "Cleaning", "Other", "Manager"];
-            break;
         case "reception_room":
-            WhoCanWorks = ["Receptionist", "Manager", "Cleaning"];
+            WhoCanWorks = ["Receptionist"];
             break;
         case "servers_room":
-            WhoCanWorks = ["IT Guy", "Manager", "Cleaning"];
+            WhoCanWorks = ["IT Guy"];
             break;
         case "security_room":
-            WhoCanWorks = ["Security", "Manager", "Cleaning"];
+            WhoCanWorks = ["Security"];
             break;
-        case "staff_room":
-            WhoCanWorks = ["IT Guy", "Receptionist", "Security", "Cleaning", "Other", "Manager"];
-            break;
-        case "vault_room":
+        case "archives_room":
             WhoCanWorks = ["IT Guy", "Receptionist", "Security", "Other", "Manager"];
             break;
+        default:
+            WhoCanWorks = ["IT Guy", "Receptionist", "Security", "Other", "Manager"];
+            break;
+    }
+    
+    // Manager can be assigned everywhere
+    if (!WhoCanWorks.includes("Manager")) {
+        WhoCanWorks.push("Manager");
+    }
+    
+    // Cleaning can be assigned everywhere except Archives
+    if (RightroomId !== "archives_room" && !WhoCanWorks.includes("Cleaning")) {
+        WhoCanWorks.push("Cleaning");
     }
     const addWorkerToroom = document.getElementById("addWorkerToroom")
     const workersListInModal = document.getElementById("workersListInModal")
@@ -201,40 +227,41 @@ function FilterWorkers(btn) {
     unassigned_staff_list.forEach(worker => {
         if (WhoCanWorks.includes(worker.worker_role)) {
             workerCard += `
-                <div class="staff-card" onclick="assignWorkerToRoom(${worker.id}, '${RightroomId}')" style="cursor: pointer;">
-                    <img src="${worker.worker_profile_image || '/public/man (1).png'}" alt="Staff Profile">
-                    <div class="staff-info">
-                        <div class="staff-name">${worker.worker_name}</div>
-                        <div class="staff-role">${worker.worker_role}</div>
+                <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer transition-all hover:bg-gray-100 hover:-translate-y-0.5 hover:shadow-sm border border-gray-200 mb-3" onclick="assignWorkerToRoom(${worker.id}, '${RightroomId}')">
+                    <img src="${worker.worker_profile_image || '/public/man (1).png'}" alt="Staff Profile" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+                    <div class="flex-1">
+                        <div class="font-medium text-gray-900 mb-1">${worker.worker_name}</div>
+                        <div class="text-sm text-gray-600">${worker.worker_role}</div>
                     </div>
                 </div>
             `;
         }
     });
     
-    workersListInModal.innerHTML = workerCard || '<div class="empty-state"><i class="fas fa-users-slash"></i><p>No suitable staff available</p></div>';
+    workersListInModal.innerHTML = workerCard || '<div class="flex flex-col items-center justify-center gap-3 p-8 text-gray-500 text-center"><i class="fas fa-users-slash text-3xl text-gray-400"></i><p class="text-sm">No suitable staff available</p></div>';
     return WhoCanWorks;
 }
 
-// Function to assign worker to room
+// Function to assign worker to room and display it
 function assignWorkerToRoom(workerId, roomId) {
     const worker = unassigned_staff_list.find(w => w.id == workerId);
-    if (!worker) return;
-    
     // Remove from unassigned list
     const index = unassigned_staff_list.findIndex(w => w.id == workerId);
     unassigned_staff_list.splice(index, 1);
-    
     // Add to room
-    const roomList = document.getElementById(roomId.replace('_room', '_staff_list') || roomId + '_list');
+    let listId = roomId.replace('_room', '_staff_list');
+    if (roomId === 'vault_room') listId = 'vault_list';
+    if (roomId === 'staff_room') listId = 'staff_list';
+    const roomList = document.getElementById(listId);
     if (roomList) {
         const workerCard = `
-            <div class="staff-card">
-                <img src="${worker.worker_profile_image || '/public/user (1).png'}" alt="Staff Profile">
-                <div class="staff-info">
-                    <div class="staff-name">${worker.worker_name}</div>
-                    <div class="staff-role">${worker.worker_role}</div>
+            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                <img src="${worker.worker_profile_image || '/public/user (1).png'}" alt="Staff Profile" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+                <div class="flex-1">
+                    <div class="font-medium text-gray-900 mb-1">${worker.worker_name}</div>
+                    <div class="text-sm text-gray-600">${worker.worker_role}</div>
                 </div>
+                <button onclick="MoveToSideBar()" class="text-red-500 hover:text-red-700 p-1"><i class="fa-solid fa-xmark"></i></button>
             </div>
         `;
         roomList.innerHTML += workerCard;
@@ -243,6 +270,10 @@ function assignWorkerToRoom(workerId, roomId) {
     // Update sidebar and close modal
     RenderedWorkersInSidebar();
     document.getElementById("addWorkerToroom").style.display = "none";
+}
+// the function that move the Worker From the room to the Side bar when user click to the delete btn
+function MoveToSideBar() {
+    
 }
 //the function that generate Worker Id automaticly
 function GenerateId() {
@@ -276,13 +307,14 @@ function RenderedWorkersInSidebar() {
     for (let item of unassigned_staff_list) {
         console.log(item)
         unassigned_staff_card += `
-            <div class="staff-card" draggable="true" ondragstart="dragstartHandler(event)">
+            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer transition-all hover:bg-gray-100 hover:-translate-y-0.5 hover:shadow-sm border border-gray-200" draggable="true" ondragstart="dragstartHandler(event)">
                 <img onclick="WorkerProfileDetails(${item.id})" 
                      src="${item.worker_profile_image || '/public/user (1).png'}" 
-                     alt="Staff Profile">
-                <div class="staff-info">
-                    <div class="staff-name">${item.worker_name}</div>
-                    <div class="staff-role">${item.worker_role}</div>
+                     alt="Staff Profile"
+                     class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+                <div class="flex-1">
+                    <div class="font-medium text-gray-900 mb-1">${item.worker_name}</div>
+                    <div class="text-sm text-gray-600">${item.worker_role}</div>
                 </div>
             </div>
         `;
@@ -291,52 +323,36 @@ function RenderedWorkersInSidebar() {
 }
 // the function that allow user to see worker details 
 function WorkerProfileDetails(id) {
-    let experiencesContainer = document.getElementById("experiencesContainer")
-    let workerPersonalInformation = document.getElementById("workerPersonalInformation")
     let findworker = unassigned_staff_list.find((worker) => worker.id == id);
-    console.log(findworker)
-    workerProfile.style.display = "grid"
-    let WorkerDetails = `
-     <div>
-    <h1 class = "text-black text-center title_font">Worker Profile</h1>
- <div draggabel = true ondragstart="dragstartHandler(event)"  id="staff_card" class="staffCardInprofileModal">
-            <div style="background-image: url('/public/white.jpg');" 
-                id="staff_profil" 
-                class="w-15 h-15 rounded-full border-dashed border border-[#999696] ml-2">
-                <img onclick = "WorkerProfileDetails(${findworker.id})" src="${findworker.worker_profile_image || '/public/user (1).png'}" 
-                     width="100%" class="grid place-content-center" height="100%" 
-                     id="staff_card_profil" alt="Staff Profile">
-            </div>
-            <div class="grid-cols-1">
-                <p id="staff_name" class="primary_font">${findworker.worker_name}</p>
-                <p id="staff_role" class="secondry_font">${findworker.worker_role}</p>
-            </div>
-            
+    if (!findworker) return;
+    
+    document.getElementById("workerProfile").style.display = "flex";
+    
+    document.getElementById("workerPersonalInformation").innerHTML = `
+        <div class="text-center mb-6">
+            <img src="${findworker.worker_profile_image || '/public/user (1).png'}" 
+                 class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-blue-100">
+            <h2 class="text-xl font-bold text-gray-900">${findworker.worker_name}</h2>
+            <p class="text-blue-600 font-medium">${findworker.worker_role}</p>
         </div>
-     `
-    let experience = ""
-
-    for (let item of findworker.experiences) {
-        experience += `
-            
-<div id="experience_details" class="bg-[#f3f3f3] mt-5 p-10 rounded-sm grid gap-4">
-                    <h2 class="modal_primary_font text-center">Experience</h2>
-                    <div class="grid gap-4" id="experiences_container">
-                        <label class="modal_label" for="company_name">Company:</label>
-                        <p>${item.companyNameInexperience}</p>
-                        <label class="modal_label" for="worker_role">Role:</label>
-                       <p>${item.workerRoleInexperience}</p>
-                        <label class="modal_label" for="starting_date">From:</label>
-                       <p>${item.endingDateInexperience}</p>
-                        <label class="modal_label" for="ending_date">To:</label>
-                        <p>${item.startingDateInexperience}</p>
-
+    `;
+    
+    let experienceHtml = "";
+    if (findworker.experiences && findworker.experiences.length > 0) {
+        experienceHtml = "<h3 class='text-lg font-semibold text-gray-900 mb-4'>Experience</h3>";
+        findworker.experiences.forEach(exp => {
+            experienceHtml += `
+                <div class="bg-gray-50 p-4 rounded-lg mb-3">
+                    <div class="font-medium text-gray-900">${exp.companyNameInexperience}</div>
+                    <div class="text-blue-600 text-sm">${exp.workerRoleInexperience}</div>
+                    <div class="text-gray-500 text-xs mt-1">${exp.startingDateInexperience} - ${exp.endingDateInexperience}</div>
                 </div>
-     `;
-        experiencesContainer.innerHTML = experience
+            `;
+        });
+    } else {
+        experienceHtml = "<p class='text-gray-500 text-center'>No experience recorded</p>";
     }
-    workerPersonalInformation.innerHTML = WorkerDetails;
+    
+    document.getElementById("experiencesContainer").innerHTML = experienceHtml;
 }
-function InitApp() {
 
-}

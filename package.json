@@ -1,6 +1,29 @@
 {
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.17",
+    "@tailwindcss/cli": "^4.1.17"
+  },
+  "name": "workspace-staff-manager",
+  "version": "1.0.0",
+  "description": "L’entreprise WorkSphere souhaite disposer d’une application web innovante dédiée à la gestion visuelle et interactive du personnel au sein de ses espaces de travail.\r Contexte du projet\r Objectifs généraux",
+  "main": "index.js",
+  "devDependencies": {
     "tailwindcss": "^4.1.17"
-  }
+  },
+  "scripts": {
+    "build-css": "tailwindcss -i css/input.css -o css/output.css",
+    "watch-css": "tailwindcss -i css/input.css -o css/output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lafhielzakaria/Workspace-Staff-Manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lafhielzakaria/Workspace-Staff-Manager/issues"
+  },
+  "homepage": "https://github.com/lafhielzakaria/Workspace-Staff-Manager#readme"
 }
