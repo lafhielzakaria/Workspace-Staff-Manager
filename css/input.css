@@ -2,22 +2,22 @@
 
 @layer components {
     .green_btn {
-        border-radius: 5px;
+        border-radius: 8px;
         background-color: rgb(9, 183, 9);
-        padding-inline: --spacing(5);
-        padding-block: --spacing(2);
+        padding: 12px 24px;
         font-weight: var(--font-weight-semibold);
         color: var(--color-white);
         box-shadow: var(--shadow-md);
-        /* margin: 0 90px; */
-        display: grid;
-        place-content: center;
-        width: 50%;
-        margin: auto;
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        border: none;
         
         &:hover {
             @media (hover: hover) {
-                background-color: rgb(181, 181, 181);
+                background-color: rgb(7, 150, 7);
             }
         }
     }
@@ -38,36 +38,44 @@
     }
 
     .addExperiences {
-        /* top: 50%;
-        left: 50%; */
-        width: 10%;
+        width: 50px;
+        height: 50px;
         display: grid;
         place-content: center;
         justify-self: center;
-        border-radius: 3px;
+        border-radius: 50%;
         background-color: rgb(0, 89, 255);
-        padding-inline: --spacing(5);
-        padding-block: --spacing(2);
+        font-size: 24px;
         font-weight: var(--font-weight-semibold);
         color: var(--color-white);
         box-shadow: var(--shadow-md);
+        cursor: pointer;
+        transition: background-color 0.2s;
+        border: none;
 
-
+        &:hover {
+            @media (hover: hover) {
+                background-color: rgb(0, 70, 200);
+            }
+        }
     }
 
     .blue_btn {
         text-align: center;
-        border-radius: 3px;
+        border-radius: 8px;
         background-color: rgb(0, 89, 255);
-        padding-inline: --spacing(5);
-        padding-block: --spacing(2);
+        padding: 12px 24px;
         font-weight: var(--font-weight-semibold);
         color: var(--color-white);
         box-shadow: var(--shadow-md);
+        cursor: pointer;
+        transition: background-color 0.2s;
+        border: none;
+        margin-top: 15px;
 
         &:hover {
             @media (hover: hover) {
-                background-color: rgb(58, 58, 58);
+                background-color: rgb(0, 70, 200);
             }
         }
     }
@@ -102,10 +110,38 @@
         color: gray;
     }
 
+    .main-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+        .main-container {
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+    }
+
     .mobile_cards_layout {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 44px;
+        gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+        .mobile_cards_layout {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .mobile_cards_layout {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 
     .pc_version {
@@ -115,21 +151,23 @@
 
     .mobile_room_name {
         color: rgb(255, 255, 255);
-        margin-bottom: 35px;
+        margin-bottom: 20px;
         font-weight: bold;
+        font-size: 18px;
     }
 
     .mobile_room_style {
         background-color: rgb(0, 0, 0);
-        width: 80%;
-        margin: auto;
-        padding-top: 10%;
-        padding-bottom: 10%;
+        width: 100%;
+        padding: 30px 20px;
         color: black;
         font-weight: bold;
         text-align: center;
-        padding-bottom: 10%;
-        border-radius: 2%;
+        border-radius: 8px;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .closeModal {
@@ -154,36 +192,64 @@
 
     .staff_card {
         display: grid;
-        grid-template-columns: 40% 60%;
-        place-content: center;
-        margin: auto;
-        width: 80%;
+        grid-template-columns: 60px 1fr;
+        align-items: center;
+        width: 100%;
         border-radius: 8px;
-        padding: 3%;
-        gap: 2%;
+        padding: 12px;
+        gap: 12px;
         background-color: rgb(0, 0, 0);
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .staff_card:hover {
+        transform: translateY(-2px);
+    }
+
+    .staff_card img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
     }
     .staffCardInprofileModal {
         display: grid;
-        grid-template-columns: 40% 60%;
-        place-content: center;
-        margin: auto;
-        width: 80%;
+        grid-template-columns: 80px 1fr;
+        align-items: center;
+        width: 100%;
         border-radius: 8px;
-        padding: 3%;
-        gap: 2%;
+        padding: 15px;
+        gap: 15px;
         font-size: larger;
+    }
+
+    .staffCardInprofileModal img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
     }
 
     .ModalstaffCard {
         display: grid;
-        grid-template-columns: 40% 60%;
-        place-content: center;
-        width: 200%;
+        grid-template-columns: 60px 1fr;
+        align-items: center;
+        width: 100%;
         border-radius: 8px;
-        padding: 3%;
-        gap: 2%;
+        padding: 12px;
+        gap: 12px;
         background-color: rgb(0, 0, 0);
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .ModalstaffCard:hover {
+        transform: translateY(-2px);
+    }
+
+    .ModalstaffCard img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
     }
 
     .pcLayout {
@@ -198,11 +264,15 @@
 
     .unassigned_staff_list_mobile_version {
         background-color: white;
-        margin: 8px 15px 0 15px;
         display: grid;
-        gap: 10px;
-        padding: 7px 0 16px 0;
-        border-radius: 5px;
+        gap: 15px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 20px;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
     }
 
     .blue_btn {
@@ -242,51 +312,55 @@
     }
 
     #addWorkerToroom {
-        gap: 10px;
-        max-width: 500px;
+        gap: 15px;
+        max-width: 600px;
         width: 90%;
-        height: 70%;
-        padding: 20px;
+        max-height: 80vh;
+        padding: 30px;
         background-color: white;
-        border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 40px;
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1000;
         display: none;
+        overflow-y: auto;
     }
 
     #workerProfile {
-        gap: 10px;
-        max-width: 500px;
+        gap: 15px;
+        max-width: 600px;
         width: 90%;
-        height: 70%;
-        padding: 20px;
+        max-height: 80vh;
+        padding: 30px;
         background-color: white;
-        border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 40px;
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1000;
         display: none;
+        overflow-y: auto;
     }
 
     dialog {
         position: fixed;
-        max-width: 500px;
+        max-width: 600px;
         width: 90%;
-        padding: 20px;
+        max-height: 90vh;
+        padding: 30px;
         background-color: white;
-        border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 40px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1000;
+        overflow-y: auto;
     }
 
     dialog::backdrop {
@@ -301,10 +375,17 @@
     dialog input,
     dialog select {
         width: 100%;
-        padding: 4px;
+        padding: 10px;
         margin-bottom: 15px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    dialog input:focus,
+    dialog select:focus {
+        outline: none;
+        border-color: rgb(0, 89, 255);
     }
 
     dialog button {

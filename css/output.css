@@ -14,7 +14,6 @@
     --text-lg: 1.125rem;
     --text-lg--line-height: calc(1.75 / 1.125);
     --font-weight-semibold: 600;
-    --font-weight-bold: 700;
     --radius-sm: 0.25rem;
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --default-font-family: var(--font-sans);
@@ -191,17 +190,11 @@
   .mr-3 {
     margin-right: calc(var(--spacing) * 3);
   }
-  .mb-20 {
-    margin-bottom: calc(var(--spacing) * 20);
-  }
   .ml-2 {
     margin-left: calc(var(--spacing) * 2);
   }
   .grid {
     display: grid;
-  }
-  .table {
-    display: table;
   }
   .h-15 {
     height: calc(var(--spacing) * 15);
@@ -209,35 +202,17 @@
   .h-25 {
     height: calc(var(--spacing) * 25);
   }
-  .h-30 {
-    height: calc(var(--spacing) * 30);
-  }
-  .h-70 {
-    height: calc(var(--spacing) * 70);
-  }
   .w-15 {
     width: calc(var(--spacing) * 15);
   }
   .w-25 {
     width: calc(var(--spacing) * 25);
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
-  .transform {
-    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-  }
   .cursor-pointer {
     cursor: pointer;
   }
-  .resize {
-    resize: both;
-  }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-  .grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .place-content-center {
     place-content: center;
@@ -254,14 +229,8 @@
   .gap-4 {
     gap: calc(var(--spacing) * 4);
   }
-  .gap-5 {
-    gap: calc(var(--spacing) * 5);
-  }
   .gap-6 {
     gap: calc(var(--spacing) * 6);
-  }
-  .gap-10 {
-    gap: calc(var(--spacing) * 10);
   }
   .rounded-full {
     border-radius: calc(infinity * 1px);
@@ -286,12 +255,6 @@
   .bg-blue-50 {
     background-color: var(--color-blue-50);
   }
-  .bg-white {
-    background-color: var(--color-white);
-  }
-  .p-4 {
-    padding: calc(var(--spacing) * 4);
-  }
   .p-10 {
     padding: calc(var(--spacing) * 10);
   }
@@ -302,75 +265,30 @@
     font-size: var(--text-lg);
     line-height: var(--tw-leading, var(--text-lg--line-height));
   }
-  .font-bold {
-    --tw-font-weight: var(--font-weight-bold);
-    font-weight: var(--font-weight-bold);
-  }
   .text-black {
     color: var(--color-black);
   }
   .text-white {
     color: var(--color-white);
   }
-  .underline {
-    text-decoration-line: underline;
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
-  }
-  .md\:w-50 {
-    @media (width >= 48rem) {
-      width: calc(var(--spacing) * 50);
-    }
-  }
-  .md\:w-60 {
-    @media (width >= 48rem) {
-      width: calc(var(--spacing) * 60);
-    }
-  }
-  .md\:grid-cols-2 {
-    @media (width >= 48rem) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  .md\:grid-cols-3 {
-    @media (width >= 48rem) {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-  .md\:gap-10 {
-    @media (width >= 48rem) {
-      gap: calc(var(--spacing) * 10);
-    }
-  }
-  .md\:gap-20 {
-    @media (width >= 48rem) {
-      gap: calc(var(--spacing) * 20);
-    }
-  }
-  .md\:p-10 {
-    @media (width >= 48rem) {
-      padding: calc(var(--spacing) * 10);
-    }
-  }
 }
 @layer components {
   .green_btn {
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: rgb(9, 183, 9);
-    padding-inline: calc(var(--spacing) * 5);
-    padding-block: calc(var(--spacing) * 2);
+    padding: 12px 24px;
     font-weight: var(--font-weight-semibold);
     color: var(--color-white);
     box-shadow: var(--shadow-md);
-    display: grid;
-    place-content: center;
-    width: 50%;
-    margin: auto;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
     &:hover {
       @media (hover: hover) {
-        background-color: rgb(181, 181, 181);
+        background-color: rgb(7, 150, 7);
       }
     }
   }
@@ -388,30 +306,41 @@
     }
   }
   .addExperiences {
-    width: 10%;
+    width: 50px;
+    height: 50px;
     display: grid;
     place-content: center;
     justify-self: center;
-    border-radius: 3px;
+    border-radius: 50%;
     background-color: rgb(0, 89, 255);
-    padding-inline: calc(var(--spacing) * 5);
-    padding-block: calc(var(--spacing) * 2);
+    font-size: 24px;
     font-weight: var(--font-weight-semibold);
     color: var(--color-white);
     box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
+    &:hover {
+      @media (hover: hover) {
+        background-color: rgb(0, 70, 200);
+      }
+    }
   }
   .blue_btn {
     text-align: center;
-    border-radius: 3px;
+    border-radius: 8px;
     background-color: rgb(0, 89, 255);
-    padding-inline: calc(var(--spacing) * 5);
-    padding-block: calc(var(--spacing) * 2);
+    padding: 12px 24px;
     font-weight: var(--font-weight-semibold);
     color: var(--color-white);
     box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
+    margin-top: 15px;
     &:hover {
       @media (hover: hover) {
-        background-color: rgb(58, 58, 58);
+        background-color: rgb(0, 70, 200);
       }
     }
   }
@@ -439,10 +368,34 @@
   .secondry_font {
     color: gray;
   }
+  .main-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) {
+    .main-container {
+      grid-template-columns: 280px 1fr;
+      gap: 30px;
+    }
+  }
   .mobile_cards_layout {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 44px;
+    gap: 20px;
+  }
+  @media (min-width: 768px) {
+    .mobile_cards_layout {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .mobile_cards_layout {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
   .pc_version {
     display: grid;
@@ -450,19 +403,22 @@
   }
   .mobile_room_name {
     color: rgb(255, 255, 255);
-    margin-bottom: 35px;
+    margin-bottom: 20px;
     font-weight: bold;
+    font-size: 18px;
   }
   .mobile_room_style {
     background-color: rgb(0, 0, 0);
-    width: 80%;
-    margin: auto;
-    padding-top: 10%;
+    width: 100%;
+    padding: 30px 20px;
     color: black;
     font-weight: bold;
     text-align: center;
-    padding-bottom: 10%;
-    border-radius: 2%;
+    border-radius: 8px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .closeModal {
     float: right;
@@ -481,35 +437,58 @@
   }
   .staff_card {
     display: grid;
-    grid-template-columns: 40% 60%;
-    place-content: center;
-    margin: auto;
-    width: 80%;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+    width: 100%;
     border-radius: 8px;
-    padding: 3%;
-    gap: 2%;
+    padding: 12px;
+    gap: 12px;
     background-color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .staff_card:hover {
+    transform: translateY(-2px);
+  }
+  .staff_card img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
   }
   .staffCardInprofileModal {
     display: grid;
-    grid-template-columns: 40% 60%;
-    place-content: center;
-    margin: auto;
-    width: 80%;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
+    width: 100%;
     border-radius: 8px;
-    padding: 3%;
-    gap: 2%;
+    padding: 15px;
+    gap: 15px;
     font-size: larger;
+  }
+  .staffCardInprofileModal img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
   }
   .ModalstaffCard {
     display: grid;
-    grid-template-columns: 40% 60%;
-    place-content: center;
-    width: 200%;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+    width: 100%;
     border-radius: 8px;
-    padding: 3%;
-    gap: 2%;
+    padding: 12px;
+    gap: 12px;
     background-color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .ModalstaffCard:hover {
+    transform: translateY(-2px);
+  }
+  .ModalstaffCard img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
   }
   .pcLayout {
     grid-template-columns: 30% 70%;
@@ -521,11 +500,15 @@
   }
   .unassigned_staff_list_mobile_version {
     background-color: white;
-    margin: 8px 15px 0 15px;
     display: grid;
-    gap: 10px;
-    padding: 7px 0 16px 0;
-    border-radius: 5px;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 20px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
   }
   .blue_btn {
     background-color: #007bff;
@@ -559,49 +542,53 @@
     text-align: center;
   }
   #addWorkerToroom {
-    gap: 10px;
-    max-width: 500px;
+    gap: 15px;
+    max-width: 600px;
     width: 90%;
-    height: 70%;
-    padding: 20px;
+    max-height: 80vh;
+    padding: 30px;
     background-color: white;
-    border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 40px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
     display: none;
+    overflow-y: auto;
   }
   #workerProfile {
-    gap: 10px;
-    max-width: 500px;
+    gap: 15px;
+    max-width: 600px;
     width: 90%;
-    height: 70%;
-    padding: 20px;
+    max-height: 80vh;
+    padding: 30px;
     background-color: white;
-    border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 40px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
     display: none;
+    overflow-y: auto;
   }
   dialog {
     position: fixed;
-    max-width: 500px;
+    max-width: 600px;
     width: 90%;
-    padding: 20px;
+    max-height: 90vh;
+    padding: 30px;
     background-color: white;
-    border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 40px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
+    overflow-y: auto;
   }
   dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
@@ -612,10 +599,15 @@
   }
   dialog input, dialog select {
     width: 100%;
-    padding: 4px;
+    padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  dialog input:focus, dialog select:focus {
+    outline: none;
+    border-color: rgb(0, 89, 255);
   }
   dialog button {
     background-color: rgb(9, 183, 9);
@@ -626,36 +618,7 @@
     cursor: pointer;
   }
 }
-@property --tw-rotate-x {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-rotate-y {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-rotate-z {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-skew-x {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-skew-y {
-  syntax: "*";
-  inherits: false;
-}
 @property --tw-border-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
-@property --tw-font-weight {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-outline-style {
   syntax: "*";
   inherits: false;
   initial-value: solid;
@@ -663,14 +626,7 @@
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
-      --tw-rotate-x: initial;
-      --tw-rotate-y: initial;
-      --tw-rotate-z: initial;
-      --tw-skew-x: initial;
-      --tw-skew-y: initial;
       --tw-border-style: solid;
-      --tw-font-weight: initial;
-      --tw-outline-style: solid;
     }
   }
 }

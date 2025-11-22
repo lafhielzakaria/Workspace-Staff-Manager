@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="css/output.css">
 </head>
 
-<body class="bg-blue-50 grid gap-10 mb-20 md:grid-cols-2">
-    <aside id="unassigned_staff" class="unassigned_staff_list_mobile_version md:w-60">
+<body class="bg-blue-50">
+    <div class="main-container">
+    <aside id="unassigned_staff" class="unassigned_staff_list_mobile_version">
         <h1 class="text-center primary_font text-lg">Staff Members (Unassigned)</h1>
         <div id="unassigned_staff_list" class="grid gap-6">
         </div>
@@ -60,48 +61,43 @@
             <button type="submit" id="submit_worker" class="green_btn ">Submit</button>
         </form>
     </dialog>
-    <div id="building_structure" class="mobile_cards_layout md:grid-cols-3 md:gap-10">
-        <aside class="grid gap-3">
-            <div name="conference_room" id="conference_room" class="mobile_room_style">
-                <h1 class="mobile_room_name">Conference Room</h1>
-                <div id="conference_staff_list"></div>
-                <button type="button" name="conference_room" id="submit_experience_btn" class="blue_btn">+</button>
-
-            </div>
-            <div name="reception_room" id="reception_room" class="mobile_room_style ">
-                <h1 class="mobile_room_name">Reception Room</h1>
-                <div id="reception_staff_list"></div>
-                <button name="reception_room" type="button" id="submit_experience_btn" class=" blue_btn">+</button>
-            </div>
-        </aside>
-        <section class="grid gap-3">
-            <div name="servers_room" id="servers_room" class="mobile_room_style">
-                <h1 class="mobile_room_name">Servers Room</h1>
-                <div id="servers_staff_list"></div>
-                <button name="servers_room" type="button" id="submit_experience_btn" class=" blue_btn">+</button>
-
-            </div>
-            <div name="security_room" id="security_room" class="mobile_room_style">
-                <h1 class="mobile_room_name">Security Room</h1>
-                <div id="security_staff_list"></div>
-                <button name="security_room" type="button" id="submit_experience_btn" class="blue_btn">+</button>
-            </div>
-        </section>
-
-        <div name="staff_room" class="grid gap-3">
-            <div id="staff_room" class="mobile_room_style">
-                <h1 class="mobile_room_name">Staff Room</h1>
-                <div id="staff_list"></div>
-                <button name="staff_room" type="button" id="submit_experience_btn" class="blue_btn">+</button>
-
-            </div>
-            <div name="vault_room" id="vault_room" class="mobile_room_style">
-                <h1 class="mobile_room_name">Vault Room</h1>
-                <div id="vault_list"></div>
-                <button name="vault_room" type="button" id="submit_experience_btn" class=" blue_btn">+</button>
-
-            </div>
+    <div id="building_structure" class="mobile_cards_layout">
+        <div name="conference_room" id="conference_room" class="mobile_room_style">
+            <h1 class="mobile_room_name">Conference Room</h1>
+            <div id="conference_staff_list"></div>
+            <button type="button" name="conference_room" class="blue_btn">+</button>
         </div>
+        
+        <div name="reception_room" id="reception_room" class="mobile_room_style">
+            <h1 class="mobile_room_name">Reception Room</h1>
+            <div id="reception_staff_list"></div>
+            <button name="reception_room" type="button" class="blue_btn">+</button>
+        </div>
+        
+        <div name="servers_room" id="servers_room" class="mobile_room_style">
+            <h1 class="mobile_room_name">Servers Room</h1>
+            <div id="servers_staff_list"></div>
+            <button name="servers_room" type="button" class="blue_btn">+</button>
+        </div>
+        
+        <div name="security_room" id="security_room" class="mobile_room_style">
+            <h1 class="mobile_room_name">Security Room</h1>
+            <div id="security_staff_list"></div>
+            <button name="security_room" type="button" class="blue_btn">+</button>
+        </div>
+        
+        <div id="staff_room" name="staff_room" class="mobile_room_style">
+            <h1 class="mobile_room_name">Staff Room</h1>
+            <div id="staff_list"></div>
+            <button name="staff_room" type="button" class="blue_btn">+</button>
+        </div>
+        
+        <div name="vault_room" id="vault_room" class="mobile_room_style">
+            <h1 class="mobile_room_name">Vault Room</h1>
+            <div id="vault_list"></div>
+            <button name="vault_room" type="button" class="blue_btn">+</button>
+        </div>
+    </div>
     </div>
 
     <script src="script/WorkspaceStaffManager.js"></script>
