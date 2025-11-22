@@ -29,7 +29,7 @@ const Validate_Rules = {
         regex: /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{3,}$/,
         errormessage: "invilade company name"
     },
-    workerRoleInexperience : {
+    workerRoleInexperience: {
         regex: /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{3,}$/,
         errormessage: "invilade worker role"
     },
@@ -87,7 +87,7 @@ document.getElementById("closeProfileDetalsModal").addEventListener("click", () 
 addExperienceBtn.addEventListener("click", () => {
     //  1 fonction 5asha tzid another div of experieces
     let experiences_field = document.getElementById("experiences_field")
-    new_experience_details = `  <div id="experience_details" class="bg-[#f3f3f3] mt-5 p-10 rounded-sm grid gap-4">
+    new_experience_details += `  <div id="experience_details" class="bg-[#f3f3f3] mt-5 p-10 rounded-sm grid gap-4">
                     <h2 class="modal_primary_font text-center">Experience</h2>
                     <div class="grid gap-4" id="experiences_container">
                         <label class="modal_label" for="company_name">Company:</label>
@@ -103,7 +103,7 @@ addExperienceBtn.addEventListener("click", () => {
                      <div class="errormessage" name="endingDateInexperience"></div>          
                         </div>
                 </div>`
-    experiences_field.innerHTML += new_experience_details
+    experiences_field.innerHTML = new_experience_details
 });
 // the function that validate user inputs before 
 function Form_validator() {
@@ -128,6 +128,7 @@ function Form_validator() {
 }
 // the function that submit user inputs
 document.getElementById("worker_form").addEventListener("submit", (e) => {
+    let i = 0;
     e.preventDefault();
     let new_worker_inputs = e.target.querySelectorAll(".userInputs")
     let experiencesInputs = document.querySelectorAll(".experiencesInputs")
@@ -147,8 +148,15 @@ document.getElementById("worker_form").addEventListener("submit", (e) => {
     });
     experiencesInputs.forEach(experienceInput => {
         experience[experienceInput.name] = experienceInput.value
+        i++;
+        if (i === 4) {
+            new_worker.experiences.push(experience)
+            experience = {
+            }
+            i = 0;
+        }
     });
-    new_worker.experiences.push(experience)
+
     unassigned_staff_list.push(new_worker)
     console.log(experiencesInputs)
     addNewWorkerModal.close();
@@ -253,7 +261,8 @@ function RenderedWorkersInSidebar() {
 }
 // the function that allow user to see worker details 
 function WorkerProfileDetails(id) {
-    let workerProfileDetails = document.getElementById("workerProfileDetails")
+    let experiencesContainer = document.getElementById("experiencesContainer")
+    let workerPersonalInformation = document.getElementById("workerPersonalInformation")
     let findworker = unassigned_staff_list.find((worker) => worker.id == id);
     console.log(findworker)
     workerProfile.style.display = "grid"
@@ -275,7 +284,28 @@ function WorkerProfileDetails(id) {
             
         </div>
      `
-    workerProfileDetails.innerHTML = WorkerDetails;
+    let experience = ""
+
+    for (let item of findworker.experiences) {
+        experience += `
+            
+<div id="experience_details" class="bg-[#f3f3f3] mt-5 p-10 rounded-sm grid gap-4">
+                    <h2 class="modal_primary_font text-center">Experience</h2>
+                    <div class="grid gap-4" id="experiences_container">
+                        <label class="modal_label" for="company_name">Company:</label>
+                        <p>${item.companyNameInexperience}</p>
+                        <label class="modal_label" for="worker_role">Role:</label>
+                       <p>${item.workerRoleInexperience}</p>
+                        <label class="modal_label" for="starting_date">From:</label>
+                       <p>${item.endingDateInexperience}</p>
+                        <label class="modal_label" for="ending_date">To:</label>
+                        <p>${item.startingDateInexperience}</p>
+
+                </div>
+     `;
+        experiencesContainer.innerHTML = experience
+    }
+    workerPersonalInformation.innerHTML = WorkerDetails;
 }
 function InitApp() {
 

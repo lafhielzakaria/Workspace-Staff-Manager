@@ -14,7 +14,7 @@
         place-content: center;
         width: 50%;
         margin: auto;
-
+        
         &:hover {
             @media (hover: hover) {
                 background-color: rgb(181, 181, 181);
