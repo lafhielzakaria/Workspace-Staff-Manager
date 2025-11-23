@@ -34,7 +34,17 @@ const Validate_Rules = {
         errormessage: "invilade worker role"
     },
 };
-let unassigned_staff_list = []
+// LocalStorage functions
+function saveData() {
+    localStorage.setItem('unassigned_staff_list', JSON.stringify(unassigned_staff_list));
+}
+
+function getData() {
+    const data = localStorage.getItem('unassigned_staff_list');
+    return data ? JSON.parse(data) : [];
+}
+
+let unassigned_staff_list = getData();
 
 // Room capacity limits
 const ROOM_LIMITS = {
@@ -211,7 +221,7 @@ function validateExperienceDates() {
             startDateInput.style.border = "3px solid red";
             wronginput++;
         } else {
-            startDateInpreut.style.border = "3px solid green";
+            startDateInput.style.border = "3px solid green";
         }
         
         if (!endDateInput.value) {
@@ -265,6 +275,7 @@ document.getElementById("worker_form").addEventListener("submit", (e) => {
         }
     });
     unassigned_staff_list.push(new_worker)
+    saveData();
     addNewWorkerModal.close();
     RenderedWorkersInSidebar()
     workerForm.reset();
@@ -352,6 +363,7 @@ function assignWorkerToRoom(workerId, roomId) {
     // Remove from unassigned list
     const index = unassigned_staff_list.findIndex(w => w.id == workerId);
     unassigned_staff_list.splice(index, 1);
+    saveData();
     // Add to room
     if (roomList) {
         const workerCard = `
@@ -404,6 +416,7 @@ function MoveToSideBar(workerId) {
 
     if (worker) {
         unassigned_staff_list.push(worker);
+        saveData();
         RenderedWorkersInSidebar();
     }
 }
@@ -467,3 +480,7 @@ function WorkerProfileDetails(id) {
     document.getElementById("experiencesContainer").innerHTML = experienceHtml;
 }
 
+// Load data on page load
+window.addEventListener('DOMContentLoaded', () => {
+    RenderedWorkersInSidebar();
+});
