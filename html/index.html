@@ -17,12 +17,13 @@
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
                 <i class="fas fa-users text-blue-500"></i>
-                Workspace Staff Manager
+                <span class="hidden md:inline">Workspace Staff Manager</span>
+                <span class="md:hidden text-base">Staff Manager</span>
             </h1>
             <button id="add_new_worker_btn"
-                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center gap-2 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md">
+                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center gap-2 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md whitespace-nowrap">
                 <i class="fas fa-plus"></i>
-                Add Staff Member
+                <span class="md:hidden text-sm">Add</span>
             </button>
         </div>
     </header>
