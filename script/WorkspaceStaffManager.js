@@ -35,6 +35,17 @@ const Validate_Rules = {
     },
 };
 let unassigned_staff_list = []
+
+// Room capacity limits
+const ROOM_LIMITS = {
+    conference_room: 8,
+    reception_room: 3,
+    servers_room: 2,
+    security_room: 4,
+    staff_room: 10,
+    vault_room: 2,
+    archives_room: 5
+};
 const addExperienceBtn = document.getElementById("add_experience_btn");
 const unassignedStaffList = document.getElementById("unassigned_staff_list");
 const workerForm = document.getElementById("worker_form");
@@ -52,6 +63,19 @@ worker_photo_url.addEventListener("input", () => {
 //  for the modal that make you add new worker 
 document.getElementById("add_new_worker_btn").addEventListener("click", () => {
     addNewWorkerModal.showModal();
+    // Add real-time validation to inputs
+    workerForm.querySelectorAll(".userInputs").forEach(input => {
+        input.addEventListener('input', function() {
+            let errormessage = document.querySelector(`[data-field="${this.name}"]`);
+            if (this.value.trim()) {
+                this.style.border = "";
+                if (errormessage) {
+                    errormessage.textContent = "";
+                    errormessage.classList.add('hidden');
+                }
+            }
+        });
+    });
 });
 // for close the modal that make you add new worker
 document.getElementById("closeAddNewWorkerModal").addEventListener("click", () => {
@@ -83,7 +107,7 @@ addExperienceBtn.addEventListener("click", () => {
     let experiences_field = document.getElementById("experiences_field")
     new_experience_details += `
         <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
-            <h3 class="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
+            <h3 class="text-sm font-medium text-gray-700 mb-3 grid grid-cols-[auto_1fr] items-center gap-2">
                 <i class="fas fa-briefcase text-blue-500"></i>
                 Experience
             </h3>
@@ -91,10 +115,12 @@ addExperienceBtn.addEventListener("click", () => {
                 <div>
                     <label class="block text-xs font-medium text-gray-600 mb-1">Company</label>
                     <input class="experiencesInputs w-full p-2 border border-gray-300 rounded text-sm" name="companyNameInexperience" type="text" placeholder="Company name">
+                    <div class="text-red-500 text-xs mt-1 hidden exp-error" data-exp-field="companyNameInexperience"></div>
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-gray-600 mb-1">Role</label>
                     <input class="experiencesInputs w-full p-2 border border-gray-300 rounded text-sm" name="workerRoleInexperience" type="text" placeholder="Job title">
+                    <div class="text-red-500 text-xs mt-1 hidden exp-error" data-exp-field="workerRoleInexperience"></div>
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-gray-600 mb-1">From</label>
@@ -119,7 +145,7 @@ function Form_validator() {
         if (!value.match(regex)) {
             if (errormessage) {
                 errormessage.textContent = Validate_Rules[input.name].errormessage
-                errormessage.style.color = "red"
+                errormessage.classList.remove('hidden')
             }
             input.style.border = "3px solid red"
             wronginput++
@@ -127,6 +153,7 @@ function Form_validator() {
             input.style.border = "3px solid green"
             if (errormessage) {
                 errormessage.textContent = ""
+                errormessage.classList.add('hidden')
             }
         }
     });
@@ -147,31 +174,44 @@ function validateExperienceDates() {
         let startDateInput = experiencesInputs[i + 2];
         let endDateInput = experiencesInputs[i + 3];
         
-        if (!companyInput.value.trim()) {
+        let companyError = companyInput.parentElement.querySelector('[data-exp-field="companyNameInexperience"]');
+        let roleError = roleInput.parentElement.querySelector('[data-exp-field="workerRoleInexperience"]');
+        
+        if (!companyInput.value.trim() || !Validate_Rules.companyNameInexperience.regex.test(companyInput.value.trim())) {
             companyInput.style.border = "3px solid red";
+            if (companyError) {
+                companyError.textContent = Validate_Rules.companyNameInexperience.errormessage;
+                companyError.classList.remove('hidden');
+            }
             wronginput++;
-        } else if (Validate_Rules.companyNameInexperience.regex.test(companyInput.value.trim())) {
-            companyInput.style.border = "3px solid green";
         } else {
-            companyInput.style.border = "3px solid red";
-            wronginput++;
+            companyInput.style.border = "3px solid green";
+            if (companyError) {
+                companyError.textContent = "";
+                companyError.classList.add('hidden');
+            }
         }
         
-        if (!roleInput.value.trim()) {
+        if (!roleInput.value.trim() || !Validate_Rules.workerRoleInexperience.regex.test(roleInput.value.trim())) {
             roleInput.style.border = "3px solid red";
+            if (roleError) {
+                roleError.textContent = Validate_Rules.workerRoleInexperience.errormessage;
+                roleError.classList.remove('hidden');
+            }
             wronginput++;
-        } else if (Validate_Rules.workerRoleInexperience.regex.test(roleInput.value.trim())) {
-            roleInput.style.border = "3px solid green";
         } else {
-            roleInput.style.border = "3px solid red";
-            wronginput++;
+            roleInput.style.border = "3px solid green";
+            if (roleError) {
+                roleError.textContent = "";
+                roleError.classList.add('hidden');
+            }
         }
         
         if (!startDateInput.value) {
             startDateInput.style.border = "3px solid red";
             wronginput++;
         } else {
-            startDateInput.style.border = "3px solid green";
+            startDateInpreut.style.border = "3px solid green";
         }
         
         if (!endDateInput.value) {
@@ -232,9 +272,14 @@ document.getElementById("worker_form").addEventListener("submit", (e) => {
     document.getElementById("worker_card_profil").src = "";
     document.getElementById("worker_card_profil").classList.add("hidden");
     new_experience_details = "";
-    // Reset input borders
+    // Reset input borders and hide error messages
     workerForm.querySelectorAll(".userInputs").forEach(input => {
         input.style.border = "";
+        let errormessage = document.querySelector(`[data-field="${input.name}"]`);
+        if (errormessage) {
+            errormessage.textContent = "";
+            errormessage.classList.add('hidden');
+        }
     });
 });
 // the function that filtre the workers and  display theme in the modal
@@ -292,15 +337,22 @@ function FilterWorkers(btn) {
 
 // Function to assign worker to room and display it
 function assignWorkerToRoom(workerId, roomId) {
+    // Check room capacity
+    let listId = roomId.replace('_room', '_staff_list');
+    if (roomId === 'vault_room') listId = 'vault_list';
+    if (roomId === 'staff_room') listId = 'staff_list';
+    const roomList = document.getElementById(listId);
+    
+    if (roomList && roomList.children.length >= ROOM_LIMITS[roomId]) {
+        alert(`This room is at full capacity (${ROOM_LIMITS[roomId]} workers maximum)`);
+        return;
+    }
+    
     const worker = unassigned_staff_list.find(w => w.id == workerId);
     // Remove from unassigned list
     const index = unassigned_staff_list.findIndex(w => w.id == workerId);
     unassigned_staff_list.splice(index, 1);
     // Add to room
-    let listId = roomId.replace('_room', '_staff_list');
-    if (roomId === 'vault_room') listId = 'vault_list';
-    if (roomId === 'staff_room') listId = 'staff_list';
-    const roomList = document.getElementById(listId);
     if (roomList) {
         const workerCard = `
             <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
