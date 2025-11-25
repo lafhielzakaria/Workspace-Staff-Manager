@@ -1,4 +1,3 @@
-// Change name of variables and ID
 // 1: Validation Rules
 const Validate_Rules = {
     worker_name: {
@@ -10,7 +9,6 @@ const Validate_Rules = {
         errormessage: "invilade url"
     },
     worker_role: {
-        regex: /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{3,}$/,
         errormessage: "invilade worker role"
     },
     company_name: {
@@ -34,6 +32,14 @@ const Validate_Rules = {
         errormessage: "invilade worker role"
     },
 };
+//Here I declare my variables
+const addExperienceBtn = document.getElementById("add_experience_btn");
+const unassignedStaffList = document.getElementById("unassigned_staff_list");
+const workerForm = document.getElementById("worker_form");
+const addNewWorkerModal = document.getElementById("add_new_worker_modal");
+let new_experience_details = ""
+let worker_photo_url = document.getElementById("worker_photo_url")
+
 // LocalStorage functions
 function saveData() {
     localStorage.setItem('unassigned_staff_list', JSON.stringify(unassigned_staff_list));
@@ -41,7 +47,10 @@ function saveData() {
 
 function getData() {
     const data = localStorage.getItem('unassigned_staff_list');
-    return data ? JSON.parse(data) : [];
+    if (data) {
+        return JSON.parse(data);
+    } 
+        return [];
 }
 
 let unassigned_staff_list = getData();
@@ -56,19 +65,13 @@ const ROOM_LIMITS = {
     vault_room: 2,
     archives_room: 5
 };
-const addExperienceBtn = document.getElementById("add_experience_btn");
-const unassignedStaffList = document.getElementById("unassigned_staff_list");
-const workerForm = document.getElementById("worker_form");
-const addNewWorkerModal = document.getElementById("add_new_worker_modal");
-let new_experience_details = ""
-let worker_photo_url = document.getElementById("worker_photo_url")
 let worker_card_profil = document.getElementById("worker_card_profil")
 worker_photo_url.addEventListener("input", () => {
     if (worker_photo_url.value) {
         worker_card_profil.src = worker_photo_url.value
-        return;
+    } else {
+        worker_card_profil.src = "/public/user (1).png"
     }
-    worker_card_profil.src = "/public/user (1).png"
 })
 //  for the modal that make you add new worker 
 document.getElementById("add_new_worker_btn").addEventListener("click", () => {
@@ -399,11 +402,18 @@ function MoveToSideBar(workerId) {
                     const name = card.querySelector('.font-medium').textContent;
                     const role = card.querySelector('.text-sm').textContent;
 
+                    let profileImage;
+                    if (img.src.includes('/public/')) {
+                        profileImage = img.src;
+                    } else {
+                        profileImage = null;
+                    }
+                    
                     worker = {
                         id: workerId,
                         worker_name: name,
                         worker_role: role,
-                        worker_profile_image: img.src.includes('/public/') ? img.src : null,
+                        worker_profile_image: profileImage,
                         experiences: []
                     };
 
@@ -448,10 +458,7 @@ function RenderedWorkersInSidebar() {
 // the function that allow user to see worker details 
 function WorkerProfileDetails(id) {
     let findworker = unassigned_staff_list.find((worker) => worker.id == id);
-    if (!findworker) return;
-
     document.getElementById("workerProfile").style.display = "flex";
-
     document.getElementById("workerPersonalInformation").innerHTML = `
         <div class="text-center mb-6">
             <img src="${findworker.worker_profile_image || '/public/user (1).png'}" 
